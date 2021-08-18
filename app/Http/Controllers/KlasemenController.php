@@ -13,14 +13,33 @@ class KlasemenController extends BaseController
 {   
     public function index()
     {
-        $klasemen = Klasemen::orderBy('poin','desc')->get();
+        $klasemen = Klasemen::orderBy('nama_klub','asc')->orderBy('poin','desc')->get();
+
+        $data = [];
+        $data_klasemen = [];
+        $no = 0;
+        foreach($klasemen as $kls){
+            $no++;
+            $data['id_klub'] = $kls->id;
+            $data['no'] = $no;
+            $data['nama_klub'] = $kls->nama_klub;
+            $data['poin'] = $kls->poin;
+            $data['main'] = $kls->main;
+            $data['menang'] = $kls->menang;
+            $data['kalah'] = $kls->kalah;
+            $data['imbang'] = $kls->imbang;
+
+            array_push($data_klasemen,$data);
+        }
 
         if($klasemen)
         {
             return response()->json([
                 'success' => true,
                 'message' => 'Klasemen berhasil diambil',
-                'data'    => $klasemen
+                'data'    => [
+                    'klasemen'      => $data_klasemen,
+                ]
             ],201);
         }
         else
