@@ -61,29 +61,39 @@ class PertandinganController extends BaseController
 
 
         // cek skor
-        if($skor_home > $skor_away){
-            $data_home_win = Klasemen::where('id',$data_pertandingan['klub_home'])->first();
+        if($data_pertandingan['status'] != 1 ){
+            if($skor_home > $skor_away){
+                $data_home_win = Klasemen::where('id',$data_pertandingan['klub_home'])->first();
+                        // update klasemen
 
-            $home_win = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
-                'poin'     => $data_home_win['poin'] + 3,
-            ]);
+                $home_win = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
+                    'poin'     => $data_home_win['poin'] + 3,
+                ]);
+            }
+            else if($skor_home < $skor_away){
+                $data_away_win = Klasemen::where('id',$data_pertandingan['klub_away'])->first();
+    
+                $away_win = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
+                    'poin'     => $data_away_win['poin'] + 3,
+                ]);
+            }
         }
-        else if($skor_home < $skor_away){
-            $data_away_win = Klasemen::where('id',$data_pertandingan['klub_away'])->first();
-
-            $away_win = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
-                'poin'     => $data_away_win['poin'] + 3,
-            ]);
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'Pertandingan telah selesai',
+                'data'    => $data_pertandingan
+            ],201);
         }
 
         // end cek skor
 
-        // update klasemen
 
         // end update klasemen
         $pertandingan = Pertandingan::whereId($id)->update([
             'skor_home'     => $skor_home,
             'skor_away'   => $skor_away,
+            'status'   => 1,
         ]);
 
 
