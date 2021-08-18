@@ -13,10 +13,10 @@ class UserController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('aut',['only' =>['show']]);
+        $this->middleware('auth',['only' =>['show']]);
     }
 
-    public function show(Request $request)
+    public function show($id)
     {
 
     }
