@@ -19,60 +19,71 @@ class PertandinganController extends BaseController
 
         $data_home_klub = Klasemen::where('id', $klub_home)->first();
         $data_away_klub = Klasemen::where('id', $klub_away)->first();
-
-        if($klub_home == $klub_away){
+        if(!$data_home_klub || !$data_away_klub){
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'id tidak home dan away boleh sama',
+                    'message' => 'id tidak ada',
                     'data' => '',
                 ],
                 400
             );
-        }
-        if ($data_home_klub['id_turnamen'] == $data_away_klub['id_turnamen']) {
-            $waktu_pertandingan = $request->input('waktu_pertandingan');
-            $this->validate($request, [
-                'klub_home' => 'required',
-                'klub_away' => 'required',
-                'waktu_pertandingan' => 'required',
-            ]);
-            $pertandingan = Pertandingan::create([
-                'klub_home' => $klub_home,
-                'klub_away' => $klub_away,
-                'waktu_pertandingan' => $waktu_pertandingan,
-            ]);
-
-            if ($pertandingan) {
-                return response()->json(
-                    [
-                        'success' => true,
-                        'message' => 'Pertandingan sukses di buat',
-                        'data' => $pertandingan,
-                    ],
-                    201
-                );
-            } else {
+        }else{
+            if($klub_home == $klub_away){
                 return response()->json(
                     [
                         'success' => false,
-                        'message' => 'Pertandingan gagal di buat',
+                        'message' => 'id tidak home dan away boleh sama',
+                        'data' => '',
+                    ],
+                    400
+                );
+            }
+            if ($data_home_klub['id_turnamen'] == $data_away_klub['id_turnamen']) {
+                $waktu_pertandingan = $request->input('waktu_pertandingan');
+                $this->validate($request, [
+                    'klub_home' => 'required',
+                    'klub_away' => 'required',
+                    'waktu_pertandingan' => 'required',
+                ]);
+                $pertandingan = Pertandingan::create([
+                    'klub_home' => $klub_home,
+                    'klub_away' => $klub_away,
+                    'waktu_pertandingan' => $waktu_pertandingan,
+                ]);
+    
+                if ($pertandingan) {
+                    return response()->json(
+                        [
+                            'success' => true,
+                            'message' => 'Pertandingan sukses di buat',
+                            'data' => $pertandingan,
+                        ],
+                        201
+                    );
+                } else {
+                    return response()->json(
+                        [
+                            'success' => false,
+                            'message' => 'Pertandingan gagal di buat',
+                            'data' => '',
+                        ],
+                        400
+                    );
+                }
+            }
+            else{
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'id tidak dalam turnamen yang sama',
                         'data' => '',
                     ],
                     400
                 );
             }
         }
-        else{
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => 'id tidak dalam turnamen yang sama',
-                    'data' => '',
-                ],
-                400
-            );
-        }
+        
     }
 
     public function updatePertandingan(Request $request, $id)
