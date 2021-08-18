@@ -62,10 +62,11 @@ class PertandinganController extends BaseController
 
         // cek skor
         if($data_pertandingan['status'] != 1 ){
+            // ambil data klasemen
             $data_home_klub = Klasemen::where('id',$data_pertandingan['klub_home'])->first();
             $data_away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->first();
 
-            // update point
+            // tim kandang menang
             if($skor_home > $skor_away){
 
                 $home_klub = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
@@ -78,6 +79,7 @@ class PertandinganController extends BaseController
                     'main'     => $data_away_klub['main'] + 1,
                 ]);
             }
+            // tim tamu menang
             else if($skor_home < $skor_away){
     
                 $away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
@@ -91,6 +93,7 @@ class PertandinganController extends BaseController
                     'main'     => $data_home_klub['main'] + 1,
                 ]);
             }
+            // imbang
             else{
                 $away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
                     'poin'     => $data_away_klub['poin'] + 1,
