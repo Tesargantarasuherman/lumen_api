@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 use App\Pertandingan;
+use App\Klasemen;
 
 class PertandinganController extends BaseController
 {
@@ -47,21 +48,45 @@ class PertandinganController extends BaseController
         }
     }
 
-    public function updatePertandingan($id)
+    public function updatePertandingan(Request $request,$id)
     {
-        $klub_home = $request->input('klub_home');
-        $klub_away = $request->input('klub_away');
-        $waktu_pertandingan = $request->input('waktu_pertandingan');
+        $data_pertandingan = Pertandingan::where('id',$id)->first();
+
+        $skor_home = $request->input('skor_home');
+        $skor_away = $request->input('skor_away');
         $this->validate($request, [
-            'klub_home' => 'required',
-            'klub_away' => 'required',
-            'waktu_pertandingan' => 'required',
+            'skor_home' => 'required',
+            'skor_away' => 'required',
         ]);
-        $pertandingan = Pertandingan::create([
-            'klub_home' => $klub_home,
-            'klub_away' => $klub_away,
-            'waktu_pertandingan' => $waktu_pertandingan,
+
+
+        // cek skor
+        if($skor_home > $skor_away){
+            $data_home_win = Klasemen::where('id',$data_pertandingan['klub_home'])->first();
+
+            $home_win = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
+                'poin'     => $data_home_win['poin'] + 3,
+            ]);
+        }
+        else if($skor_home < $skor_away){
+            $data_away_win = Klasemen::where('id',$data_pertandingan['klub_away'])->first();
+
+            $away_win = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
+                'poin'     => $data_away_win['poin'] + 3,
+            ]);
+        }
+
+        // end cek skor
+
+        // update klasemen
+
+        // end update klasemen
+        $pertandingan = Pertandingan::whereId($id)->update([
+            'skor_home'     => $skor_home,
+            'skor_away'   => $skor_away,
         ]);
+
+
 
         if($pertandingan)
         {

@@ -18,7 +18,7 @@ class Pertandingan extends Model implements AuthenticatableContract, Authorizabl
      * @var array
      */
     protected $fillable = [
-        'klub_home','klub_away','waktu_pertandingan'
+        'klub_home','klub_away','waktu_pertandingan','skor_home','skor_away'
     ];
 
     /**
