@@ -24,12 +24,22 @@ class PertandinganController extends BaseController
             'klub_away' => 'required',
             'waktu_pertandingan' => 'required',
         ]);
+        if ($validator->fails()) {
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Semua Kolom Wajib Diisi!',
+                'data'   => $validator->errors()
+            ],401);
+    
+        } else {
         $pertandingan = Pertandingan::create([
             'klub_home' => $klub_home,
             'klub_away' => $klub_away,
             'waktu_pertandingan' => $waktu_pertandingan,
         ]);
-
+        }
+        
         if($pertandingan)
         {
             return response()->json([
