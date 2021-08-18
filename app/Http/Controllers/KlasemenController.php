@@ -10,8 +10,28 @@ use Illuminate\Support\Str;
 use App\Klasemen;
 
 class KlasemenController extends BaseController
-{
+{   
+    public function index()
+    {
+        $klasemen = Klasemen::orderBy('poin','desc')->get();
 
+        if($klasemen)
+        {
+            return response()->json([
+                'success' => true,
+                'message' => 'Klasemen berhasil diambil',
+                'data'    => $klasemen
+            ],201);
+        }
+        else
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Klasemen gagal diambil',
+                'data'    => ''
+            ],400);
+        }
+    }
 
     public function tambahKlub(Request $request)
     {
