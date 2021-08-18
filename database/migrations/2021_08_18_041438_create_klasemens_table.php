@@ -17,10 +17,10 @@ class CreateKlasemensTable extends Migration
             $table->id();
             $table->string('nama_klub');
             $table->integer('poin')->default(0);
-            $table->integer('main')->nullable();
-            $table->integer('menang')->nullable();
-            $table->integer('imbang')->nullable();
-            $table->integer('kalah')->nullable();
+            $table->integer('main')->default(0);
+            $table->integer('menang')->default(0);
+            $table->integer('imbang')->default(0);
+            $table->integer('kalah')->default(0);
             $table->timestamps();
         });
     }

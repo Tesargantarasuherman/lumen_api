@@ -20,7 +20,7 @@ class CreatePertandingansTable extends Migration
             $table->string('waktu_pertandingan');
             $table->integer('skor_home')->nullable();
             $table->integer('skor_away')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('status')->default(0);
 
             $table->timestamps();
         });
