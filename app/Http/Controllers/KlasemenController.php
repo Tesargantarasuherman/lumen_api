@@ -8,17 +8,21 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 use App\Klasemen;
+use App\Turnamen;
 
 class KlasemenController extends BaseController
-{   
+{
     public function index($id)
     {
-        $klasemen = Klasemen::where('id_turnamen',$id)->orderBy('nama_klub','asc')->orderBy('poin','desc')->get();
+        $klasemen = Klasemen::where('id_turnamen', $id)
+            ->orderBy('nama_klub', 'asc')
+            ->orderBy('poin', 'desc')
+            ->get();
 
         $data = [];
         $data_klasemen = [];
         $no = 0;
-        foreach($klasemen as $kls){
+        foreach ($klasemen as $kls) {
             $no++;
             $data['id_klub'] = $kls->id;
             $data['no'] = $no;
@@ -29,26 +33,29 @@ class KlasemenController extends BaseController
             $data['kalah'] = $kls->kalah;
             $data['imbang'] = $kls->imbang;
 
-            array_push($data_klasemen,$data);
+            array_push($data_klasemen, $data);
         }
 
-        if($data_klasemen)
-        {
-            return response()->json([
-                'success' => true,
-                'message' => 'Klasemen berhasil diambil',
-                'data'    => [
-                    'klasemen'      => $data_klasemen,
-                ]
-            ],201);
-        }
-        else
-        {
-            return response()->json([
-                'success' => false,
-                'message' => 'Klasemen gagal diambil',
-                'data'    => ''
-            ],400);
+        if ($data_klasemen) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Klasemen berhasil diambil',
+                    'data' => [
+                        'klasemen' => $data_klasemen,
+                    ],
+                ],
+                201
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Klasemen gagal diambil',
+                    'data' => '',
+                ],
+                400
+            );
         }
     }
 
@@ -57,43 +64,63 @@ class KlasemenController extends BaseController
         $nama_klub = $request->input('nama_klub');
         $id_turnamen = $request->input('id_turnamen');
 
-        $data_klasemen = Klasemen::where('nama_klub',$nama_klub)->where('id_turnamen',$id_turnamen)->first();
+        $data_turnamen = Turnamen::where('id', $id_turnamen)->first();
+
+        $data_klasemen = Klasemen::where('nama_klub', $nama_klub)
+            ->where('id_turnamen', $id_turnamen)
+            ->first();
 
         $this->validate($request, [
             'nama_klub' => 'required',
             'id_turnamen' => 'required',
         ]);
 
-        if($data_klasemen){
-            return response()->json([
-                'success' => false,
-                'message' => 'Nama Klub sudah ada',
-                'data'    => ''
-            ],200);
+        if (!$data_turnamen) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Turnamen tidak ada',
+                    'data' => '',
+                ],
+                400
+            );
         }
         else{
-            $klasemen = Klasemen::create([
-                'nama_klub' => $nama_klub,
-                'id_turnamen' => $id_turnamen,
-            ]);
-        }
+            if ($data_klasemen) {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Nama Klub sudah ada',
+                        'data' => '',
+                    ],
+                    200
+                );
+            } else {
+                $klasemen = Klasemen::create([
+                    'nama_klub' => $nama_klub,
+                    'id_turnamen' => $id_turnamen,
+                ]);
+            }
 
-
-        if($klasemen)
-        {
-            return response()->json([
-                'success' => true,
-                'message' => 'Nama Klub sukses di buat',
-                'data'    => $klasemen
-            ],201);
-        }
-        else
-        {
-            return response()->json([
-                'success' => false,
-                'message' => 'Nama Klub gagal di buat',
-                'data'    => ''
-            ],400);
+            if ($klasemen) {
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'Nama Klub sukses di buat',
+                        'data' => $klasemen,
+                    ],
+                    201
+                );
+            } else {
+                return response()->json(
+                    [
+                        'success' => false,
+                        'message' => 'Nama Klub gagal di buat',
+                        'data' => '',
+                    ],
+                    400
+                );
+            }
         }
     }
 }
