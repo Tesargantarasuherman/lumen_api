@@ -62,21 +62,48 @@ class PertandinganController extends BaseController
 
         // cek skor
         if($data_pertandingan['status'] != 1 ){
-            if($skor_home > $skor_away){
-                $data_home_win = Klasemen::where('id',$data_pertandingan['klub_home'])->first();
-                        // update klasemen
+            $data_home_klub = Klasemen::where('id',$data_pertandingan['klub_home'])->first();
+            $data_away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->first();
 
-                $home_win = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
-                    'poin'     => $data_home_win['poin'] + 3,
+            // update point
+            if($skor_home > $skor_away){
+
+                $home_klub = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
+                    'poin'     => $data_home_klub['poin'] + 3,
+                    'main'     => $data_home_klub['main'] + 1,
+                    'menang'     => $data_home_klub['menang'] + 1,
+                ]);
+                $away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
+                    'kalah'     => $data_away_klub['kalah'] + 1,
+                    'main'     => $data_away_klub['main'] + 1,
                 ]);
             }
             else if($skor_home < $skor_away){
-                $data_away_win = Klasemen::where('id',$data_pertandingan['klub_away'])->first();
     
-                $away_win = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
-                    'poin'     => $data_away_win['poin'] + 3,
+                $away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
+                    'poin'     => $data_away_klub['poin'] + 3,
+                    'main'     => $data_away_klub['main'] + 1,
+                    'menang'     => $data_away_klub['menang'] + 1,
+                ]);
+
+                $home_klub = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
+                    'kalah'     => $data_home_klub['kalah'] + 1,
+                    'main'     => $data_home_klub['main'] + 1,
                 ]);
             }
+            else{
+                $away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
+                    'poin'     => $data_away_klub['poin'] + 1,
+                    'main'     => $data_away_klub['main'] + 1,
+                ]);
+
+                $home_klub = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
+                    'poin'     => $data_home_klub['poin'] + 1,
+                    'main'     => $data_away_klub['main'] + 1,
+                ]);
+
+            }
+            // end update point           
         }
         else{
             return response()->json([
