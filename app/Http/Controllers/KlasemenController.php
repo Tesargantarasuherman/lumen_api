@@ -36,12 +36,26 @@ class KlasemenController extends BaseController
     public function tambahKlub(Request $request)
     {
         $nama_klub = $request->input('nama_klub');
+
+        $data_klasemen = Klasemen::where('nama_klub',$nama_klub)->first();
+
         $this->validate($request, [
             'nama_klub' => 'required',
         ]);
-        $klasemen = Klasemen::create([
-            'nama_klub' => $nama_klub,
-        ]);
+
+        if($data_klasemen){
+            return response()->json([
+                'success' => false,
+                'message' => 'Nama Klub sudah ada',
+                'data'    => ''
+            ],200);
+        }
+        else{
+            $klasemen = Klasemen::create([
+                'nama_klub' => $nama_klub,
+            ]);
+        }
+
 
         if($klasemen)
         {
