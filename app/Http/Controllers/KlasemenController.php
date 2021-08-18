@@ -16,7 +16,7 @@ class KlasemenController extends BaseController
     public function tambahKlub(Request $request)
     {
         $nama_klub = $request->input('nama_klub');
-        $request->validate([
+        $this->validate($request, [
             'nama_klub' => 'required',
         ]);
         $klasemen = Klasemen::create([
