@@ -11,9 +11,9 @@ use App\Klasemen;
 
 class KlasemenController extends BaseController
 {   
-    public function index()
+    public function index($id)
     {
-        $klasemen = Klasemen::orderBy('nama_klub','asc')->orderBy('poin','desc')->get();
+        $klasemen = Klasemen::where('id_turnamen',$id)->orderBy('nama_klub','asc')->orderBy('poin','desc')->get();
 
         $data = [];
         $data_klasemen = [];
@@ -32,7 +32,7 @@ class KlasemenController extends BaseController
             array_push($data_klasemen,$data);
         }
 
-        if($klasemen)
+        if($data_klasemen)
         {
             return response()->json([
                 'success' => true,
@@ -55,11 +55,13 @@ class KlasemenController extends BaseController
     public function tambahKlub(Request $request)
     {
         $nama_klub = $request->input('nama_klub');
+        $id_turnamen = $request->input('id_turnamen');
 
-        $data_klasemen = Klasemen::where('nama_klub',$nama_klub)->first();
+        $data_klasemen = Klasemen::where('nama_klub',$nama_klub)->where('id_turnamen',$id_turnamen)->first();
 
         $this->validate($request, [
             'nama_klub' => 'required',
+            'id_turnamen' => 'required',
         ]);
 
         if($data_klasemen){
@@ -72,6 +74,7 @@ class KlasemenController extends BaseController
         else{
             $klasemen = Klasemen::create([
                 'nama_klub' => $nama_klub,
+                'id_turnamen' => $id_turnamen,
             ]);
         }
 

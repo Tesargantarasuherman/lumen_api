@@ -18,7 +18,7 @@ class Klasemen extends Model implements AuthenticatableContract, AuthorizableCon
      * @var array
      */
     protected $fillable = [
-        'nama_klub','poin'
+        'nama_klub','poin','id_turnamen'
     ];
 
     /**
