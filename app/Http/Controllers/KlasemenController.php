@@ -42,21 +42,30 @@ class KlasemenController extends BaseController
         $this->validate($request, [
             'nama_klub' => 'required',
         ]);
+        if ($validator->fails()) {
 
-        if($data_klasemen){
             return response()->json([
                 'success' => false,
-                'message' => 'Nama Klub sudah ada',
-                'data'    => ''
-            ],200);
-        }
-        else{
-            $klasemen = Klasemen::create([
-                'nama_klub' => $nama_klub,
-            ]);
-        }
+                'message' => 'Semua Kolom Wajib Diisi!',
+                'data'   => $validator->errors()
+            ],401);
+    
+        } else {
 
+            if($data_klasemen){
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Nama Klub sudah ada',
+                    'data'    => ''
+                ],200);
+            }
+            else{
+                $klasemen = Klasemen::create([
+                    'nama_klub' => $nama_klub,
+                ]);
+            }
 
+        }
         if($klasemen)
         {
             return response()->json([
