@@ -98,11 +98,13 @@ class PertandinganController extends BaseController
                 $away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
                     'poin'     => $data_away_klub['poin'] + 1,
                     'main'     => $data_away_klub['main'] + 1,
+                    'imbang'     => $data_away_klub['imbang'] + 1,
                 ]);
 
                 $home_klub = Klasemen::where('id',$data_pertandingan['klub_home'])->update([
                     'poin'     => $data_home_klub['poin'] + 1,
-                    'main'     => $data_away_klub['main'] + 1,
+                    'main'     => $data_home_klub['main'] + 1,
+                    'imbang'     => $data_home_klub['imbang'] + 1,
                 ]);
 
             }
