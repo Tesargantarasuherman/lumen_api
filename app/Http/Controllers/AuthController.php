@@ -42,6 +42,6 @@ class AuthController extends BaseController
     }
     public function login(Request $request)
     {
-
+        $email = $request->input('email');
     }
 }
