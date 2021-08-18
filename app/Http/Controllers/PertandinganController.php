@@ -94,7 +94,7 @@ class PertandinganController extends BaseController
                 ]);
             }
             // imbang
-            else{
+            else if($skor_home == $skor_away){
                 $away_klub = Klasemen::where('id',$data_pertandingan['klub_away'])->update([
                     'poin'     => $data_away_klub['poin'] + 1,
                     'main'     => $data_away_klub['main'] + 1,
