@@ -25,8 +25,10 @@ class KlasemenController extends BaseController
             //     array_push($data_klasemen, $data);
 
             // }
+        $turnamen = Turnamen::where('id', $id)->first();
         $data = [];
         $data_klasemen = [];
+        
         $no = 0;
         foreach ($klasemen as $kls) {
             $no++;
@@ -48,6 +50,7 @@ class KlasemenController extends BaseController
                     'success' => true,
                     'message' => 'Klasemen berhasil diambil',
                     'data' => [
+                        'klasisfikasi_turnamen' => $turnamen->nama_turnamen,
                         'klasemen' => $data_klasemen,
                     ],
                 ],
