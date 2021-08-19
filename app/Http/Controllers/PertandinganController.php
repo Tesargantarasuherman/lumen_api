@@ -11,7 +11,32 @@ use App\Pertandingan;
 use App\Klasemen;
 
 class PertandinganController extends BaseController
-{
+{   
+    public function index()
+    {
+        $pertandingan = Pertandingan::orderBy('waktu_pertandingan', 'asc')
+            ->get();
+
+        if ($pertandingan) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Pertandingan berhasil diambil',
+                    'data' => $pertandingan,
+                ],
+                201
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Pertandingan gagal diambil',
+                    'data' => '',
+                ],
+                400
+            );
+        }
+    }
     public function tambahPertandingan(Request $request)
     {
         $klub_home = $request->input('klub_home');
