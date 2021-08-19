@@ -72,13 +72,15 @@ $app->configure('app');
 |
 */
 // seluruh
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+$app->middleware([
+    // App\Http\Middleware\ExampleMiddleware::class
+    App\Http\Middleware\CorsMiddleware::class 
+
+]);
 // beberapa route
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
-    'age' => App\Http\Middleware\Age::class
+    'age' => App\Http\Middleware\Age::class,
 ]);
 
 /*

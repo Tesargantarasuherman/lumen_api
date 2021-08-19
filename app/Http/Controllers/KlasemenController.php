@@ -19,12 +19,19 @@ class KlasemenController extends BaseController
             ->orderBy('poin', 'desc')
             ->get();
 
+            // foreach($klasemen->tunamen as $tur){
+            //     $no++;
+            //     $data['id_turnamen'] = $tur->nama_turnamen;
+            //     array_push($data_klasemen, $data);
+
+            // }
         $data = [];
         $data_klasemen = [];
         $no = 0;
         foreach ($klasemen as $kls) {
             $no++;
             $data['id_klub'] = $kls->id;
+            $data['nama_turnamen'] = $kls->turnamen->nama_turnamen;
             $data['no'] = $no;
             $data['nama_klub'] = $kls->nama_klub;
             $data['poin'] = $kls->poin;
@@ -32,7 +39,6 @@ class KlasemenController extends BaseController
             $data['menang'] = $kls->menang;
             $data['kalah'] = $kls->kalah;
             $data['imbang'] = $kls->imbang;
-
             array_push($data_klasemen, $data);
         }
 

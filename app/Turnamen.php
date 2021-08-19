@@ -26,5 +26,8 @@ class Turnamen extends Model implements AuthenticatableContract, AuthorizableCon
      *
      * @var array
      */
+    public function klasemen(){ 
+        return $this->hasMany('App\Klasemen','id', 'id_turnamen'); 
+    }
 
 }

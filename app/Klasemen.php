@@ -27,4 +27,9 @@ class Klasemen extends Model implements AuthenticatableContract, AuthorizableCon
      * @var array
      */
 
+    public function turnamen()
+    {
+        return $this->belongsTo('App\Turnamen', 'id_turnamen', 'id');
+    }
+
 }
