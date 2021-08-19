@@ -11,7 +11,31 @@ use App\Turnamen;
 
 class TurnamenController extends BaseController
 {
+    public function index()
+    {
+        $turnamen = Turnamen::orderBy('nama_turnamen', 'asc')
+            ->get();
 
+        if ($turnamen) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Turnamen berhasil diambil',
+                    'data' => $turnamen,
+                ],
+                201
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Turnamen gagal diambil',
+                    'data' => '',
+                ],
+                400
+            );
+        }
+    }
     public function tambahTurnamen(Request $request)
     {
         $nama_turnamen = $request->input('nama_turnamen');
