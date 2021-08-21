@@ -66,6 +66,7 @@ $router->get('/turnamen','TurnamenController@index');
 $router->post('/klasemen/tambah-klub/','KlasemenController@tambahKlub');
 $router->get('/klasemen/{id}','KlasemenController@index');
 // PERTANDINGAN
-$router->get('/pertandingan','PertandinganController@index');
+$router->get('/pertandingan/{id}','PertandinganController@index');
+$router->get('/hasil-pertandingan/{id}','PertandinganController@hasilPertandingan');
 $router->post('/pertandingan/tambah-pertandingan','PertandinganController@tambahPertandingan');
 $router->post('/pertandingan/update-pertandingan/{id}','PertandinganController@updatePertandingan');

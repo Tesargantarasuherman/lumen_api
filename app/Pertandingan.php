@@ -18,7 +18,7 @@ class Pertandingan extends Model implements AuthenticatableContract, Authorizabl
      * @var array
      */
     protected $fillable = [
-        'klub_home','klub_away','waktu_pertandingan','skor_home','skor_away'
+        'id_turnamen','klub_home','klub_away','waktu_pertandingan','skor_home','skor_away'
     ];
 
     /**
@@ -26,5 +26,17 @@ class Pertandingan extends Model implements AuthenticatableContract, Authorizabl
      *
      * @var array
      */
+    public function turnamen()
+    {
+        return $this->belongsTo('App\Turnamen', 'id_turnamen', 'id');
+    }
+    public function klubHome()
+    {
+        return $this->belongsTo('App\Klasemen','klub_home','id');
+    }
+    public function klubAway()
+    {
+        return $this->belongsTo('App\Klasemen','klub_away','id');
+    }
 
 }

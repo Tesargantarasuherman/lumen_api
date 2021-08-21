@@ -12,17 +12,28 @@ use App\Klasemen;
 
 class PertandinganController extends BaseController
 {   
-    public function index()
+    public function index($id)
     {
-        $pertandingan = Pertandingan::orderBy('waktu_pertandingan', 'asc')
+        $pertandingan = Pertandingan::where('id_turnamen', $id)->where('status', 0)->orderBy('waktu_pertandingan', 'asc')
             ->get();
+        
+        $data = [];
+        $data_pertandingan = [];
+
+        foreach($pertandingan as $per){
+            $data['klub_home'] = $per->klubHome->nama_klub;
+            $data['klub_away'] = $per->klubAway->nama_klub;
+            $data['klub_turnamen'] = $per->turnamen->nama_turnamen;
+            array_push($data_pertandingan, $data);
+        }
+
 
         if ($pertandingan) {
             return response()->json(
                 [
                     'success' => true,
                     'message' => 'Pertandingan berhasil diambil',
-                    'data' => $pertandingan,
+                    'data' => $data_pertandingan,
                 ],
                 201
             );
@@ -31,6 +42,40 @@ class PertandinganController extends BaseController
                 [
                     'success' => false,
                     'message' => 'Pertandingan gagal diambil',
+                    'data' => '',
+                ],
+                400
+            );
+        }
+    }
+    public function hasilPertandingan($id)
+    {
+        $pertandingan = Pertandingan::where('id_turnamen', $id)->where('status', 1)->orderBy('waktu_pertandingan', 'asc')
+            ->get();
+        
+        $data = [];
+        $data_pertandingan = [];
+
+        foreach($pertandingan as $per){
+            $data['klub_home'] = $per->klubHome->nama_klub;
+            $data['klub_away'] = $per->klubAway->nama_klub;
+            $data['klub_turnamen'] = $per->turnamen->nama_turnamen;
+            array_push($data_pertandingan, $data);
+        }
+        if ($data_pertandingan) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Hasil Pertandingan berhasil diambil',
+                    'data' => $data_pertandingan,
+                ],
+                201
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Hasil Pertandingan gagal diambil',
                     'data' => '',
                 ],
                 400
@@ -75,6 +120,7 @@ class PertandinganController extends BaseController
                     'klub_home' => $klub_home,
                     'klub_away' => $klub_away,
                     'waktu_pertandingan' => $waktu_pertandingan,
+                    'id_turnamen' => $data_home_klub['id_turnamen']
                 ]);
     
                 if ($pertandingan) {

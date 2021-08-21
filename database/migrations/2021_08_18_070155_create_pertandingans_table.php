@@ -15,6 +15,7 @@ class CreatePertandingansTable extends Migration
     {
         Schema::create('pertandingans', function (Blueprint $table) {
             $table->id();
+            $table->string('id_turnamen');
             $table->string('klub_home');
             $table->string('klub_away');
             $table->string('waktu_pertandingan');
