@@ -50,7 +50,7 @@ class KlasemenController extends BaseController
                     'success' => true,
                     'message' => 'Klasemen berhasil diambil',
                     'data' => [
-                        'klasisfikasi_turnamen' => $turnamen->nama_turnamen,
+                        'klasifikasi_turnamen' => $turnamen->nama_turnamen,
                         'klasemen' => $data_klasemen,
                     ],
                 ],
