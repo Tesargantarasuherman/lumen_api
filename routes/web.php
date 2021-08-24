@@ -62,6 +62,8 @@ $router->get('/user/{id}','UserController@show');
 // TURNAMEN
 $router->post('/turnamen/tambah-turnamen','TurnamenController@tambahTurnamen');
 $router->get('/turnamen','TurnamenController@index');
+// Tim
+
 // KLASEMEN
 $router->post('/klasemen/tambah-klub/','KlasemenController@tambahKlub');
 $router->get('/klasemen/{id}','KlasemenController@index');
