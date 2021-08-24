@@ -145,15 +145,18 @@ class PertandinganController extends BaseController
                 $data_home_klub['id_turnamen'] == $data_away_klub['id_turnamen']
             ) {
                 $waktu_pertandingan = $request->input('waktu_pertandingan');
+                $tanggal_pertandingan = $request->input('tanggal_pertandingan');
                 $this->validate($request, [
                     'klub_home' => 'required',
                     'klub_away' => 'required',
                     'waktu_pertandingan' => 'required',
+                    'tanggal_pertandingan' => 'required',
                 ]);
                 $pertandingan = Pertandingan::create([
                     'klub_home' => $klub_home,
                     'klub_away' => $klub_away,
                     'waktu_pertandingan' => $waktu_pertandingan,
+                    'tanggal_pertandingan' => $tanggal_pertandingan,
                     'id_turnamen' => $data_home_klub['id_turnamen'],
                 ]);
 
