@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTimTable extends Migration
+class CreateTimsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTimTable extends Migration
      */
     public function up()
     {
-        Schema::create('tim', function (Blueprint $table) {
+        Schema::create('tims', function (Blueprint $table) {
             $table->id();
             $table->string('nama_tim');
             $table->string('logo_tim')->nullable();
@@ -28,6 +28,6 @@ class CreateTimTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tim');
+        Schema::dropIfExists('tims');
     }
 }

@@ -63,7 +63,7 @@ $router->get('/user/{id}','UserController@show');
 $router->post('/turnamen/tambah-turnamen','TurnamenController@tambahTurnamen');
 $router->get('/turnamen','TurnamenController@index');
 // Tim
-
+$router->post('/tim/tambah-tim','TimController@tambahTim');
 // KLASEMEN
 $router->post('/klasemen/tambah-klub/','KlasemenController@tambahKlub');
 $router->get('/klasemen/{id}','KlasemenController@index');
