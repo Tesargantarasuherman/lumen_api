@@ -16,7 +16,6 @@ class CreateKlasemensTable extends Migration
         Schema::create('klasemens', function (Blueprint $table) {
             $table->id();
             $table->integer('id_tim');
-            $table->string('nama_klub');
             $table->integer('poin')->default(0);
             $table->integer('main')->default(0);
             $table->integer('menang')->default(0);
