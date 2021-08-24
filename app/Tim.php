@@ -27,5 +27,7 @@ class Tim extends Model implements AuthenticatableContract, AuthorizableContract
      * @var array
      */
 
-
+    public function tim(){ 
+        return $this->hasMany('App\Tim','id', 'id_tim'); 
+    }
 }

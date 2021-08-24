@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Pertandingan;
 use App\Klasemen;
 use App\Turnamen;
+use App\PapanSkor;
 
 class PertandinganController extends BaseController
 {

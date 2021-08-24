@@ -10,12 +10,54 @@ use Illuminate\Support\Str;
 use App\Klasemen;
 use App\AnggotaTim;
 use App\Turnamen;
+use App\Tim;
 
 class AnggotaTimController extends BaseController
 {
-    public function index($id)
+    public function anggotaTim($id)
     {
-       
+        $anggota_tim = AnggotaTim::where('id_tim', $id)
+        ->orderBy('no_punggung', 'desc')
+        ->get();
+        $tim = Tim::where('id', $id)->first();
+
+    $data = [];
+    $data_anggota_tim = [];
+    
+    $no = 0;
+
+    foreach ($anggota_tim as $anggota) {
+        $no++;
+        $data['nama_klub'] = $anggota->tim->nama_tim;
+        $data['nama_pemain'] = $anggota->nama_pemain;
+        $data['no_punggung'] = $anggota->no_punggung;
+        $data['posisi'] = $anggota->posisi;
+        $data['status'] = $anggota->status;
+        array_push($data_anggota_tim, $data);
+    }
+
+    if ($data_anggota_tim) {
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Anggota Tim berhasil diambil',
+                'data' => [
+                    'tim' => $tim->nama_tim,
+                    'anggota_tim' => $data_anggota_tim,
+                ],
+            ],
+            201
+        );
+    } else {
+        return response()->json(
+            [
+                'success' => false,
+                'message' => 'Anggota Tim gagal diambil',
+                'data' => '',
+            ],
+            400
+        );
+    }
     }
 
     public function tambahAnggotaTim(Request $request)

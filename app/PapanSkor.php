@@ -18,7 +18,7 @@ class AnggotaTim extends Model implements AuthenticatableContract, AuthorizableC
      * @var array
      */
     protected $fillable = [
-        'id_tim','no_punggung','nama_pemain','posisi','status'
+        'id_pemain','id_pertandingan','waktu'
     ];
 
     /**
@@ -27,10 +27,6 @@ class AnggotaTim extends Model implements AuthenticatableContract, AuthorizableC
      * @var array
      * 
      */
-    public function tim()
-    {
-        return $this->belongsTo('App\Tim', 'id_tim', 'id');
-    }
 
 
 }
