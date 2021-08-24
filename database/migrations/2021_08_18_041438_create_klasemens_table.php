@@ -21,6 +21,9 @@ class CreateKlasemensTable extends Migration
             $table->integer('menang')->default(0);
             $table->integer('imbang')->default(0);
             $table->integer('kalah')->default(0);
+            $table->integer('gol_kemasukan')->default(0);
+            $table->integer('gol_memasukan')->default(0);
+            $table->integer('gol_defisit')->default(0);
             $table->integer('id_turnamen')->nullable();
             $table->timestamps();
         });

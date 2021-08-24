@@ -9,16 +9,41 @@ use Illuminate\Support\Str;
 
 use App\Pertandingan;
 use App\Klasemen;
+use App\Turnamen;
 
 class PertandinganController extends BaseController
-{   
+{
     public function index($id)
     {
-        $pertandingan = Pertandingan::where('id_turnamen', $id)->where('status', 0)->orderBy('waktu_pertandingan', 'asc')
+        $pertandingan = Pertandingan::where('id_turnamen', $id)
+            ->where('status', 0)
+            ->orderBy('waktu_pertandingan', 'asc')
             ->get();
-        
         $data = [];
         $data_pertandingan = [];
+        // $pertandingan = [];
+        // $res_pertandingan = [];
+        // $turna = [];
+        // $turnamens = Turnamen::all();
+
+        // foreach ($turnamens as $tur) {
+        //     $pert = Pertandingan::where('id_turnamen', $tur->id)->get();
+
+        //     foreach ($pert as $per) {
+        //             $data['klub_turnamen'] = $per->turnamen->nama_turnamen;
+        //             $data['klub_home'] = $per->klubHome->nama_klub;
+        //             $data['klub_away'] = $per->klubAway->nama_klub;
+        //             $data['skor_home'] = $per->skor_home;
+        //             $data['skor_away'] = $per->skor_away;
+        //             $data['waktu_pertandingan'] = $per->waktu_pertandingan;
+        //             array_push($data_pertandingan, $data);
+        //     }
+
+        // }
+
+
+
+        // array_push($res_pertandingan, $data_pertandingan);
 
         foreach($pertandingan as $per){
             $data['klub_turnamen'] = $per->turnamen->nama_turnamen;
@@ -30,8 +55,7 @@ class PertandinganController extends BaseController
             array_push($data_pertandingan, $data);
         }
 
-
-        if ($pertandingan) {
+        if ($data_pertandingan) {
             return response()->json(
                 [
                     'success' => true,
@@ -53,13 +77,15 @@ class PertandinganController extends BaseController
     }
     public function hasilPertandingan($id)
     {
-        $pertandingan = Pertandingan::where('id_turnamen', $id)->where('status', 1)->orderBy('waktu_pertandingan', 'asc')
+        $pertandingan = Pertandingan::where('id_turnamen', $id)
+            ->where('status', 1)
+            ->orderBy('waktu_pertandingan', 'asc')
             ->get();
-        
+
         $data = [];
         $data_pertandingan = [];
 
-        foreach($pertandingan as $per){
+        foreach ($pertandingan as $per) {
             $data['klub_turnamen'] = $per->turnamen->nama_turnamen;
             $data['klub_home'] = $per->klubHome->nama_klub;
             $data['klub_away'] = $per->klubAway->nama_klub;
@@ -95,7 +121,7 @@ class PertandinganController extends BaseController
 
         $data_home_klub = Klasemen::where('id', $klub_home)->first();
         $data_away_klub = Klasemen::where('id', $klub_away)->first();
-        if(!$data_home_klub || !$data_away_klub){
+        if (!$data_home_klub || !$data_away_klub) {
             return response()->json(
                 [
                     'success' => false,
@@ -104,8 +130,8 @@ class PertandinganController extends BaseController
                 ],
                 400
             );
-        }else{
-            if($klub_home == $klub_away){
+        } else {
+            if ($klub_home == $klub_away) {
                 return response()->json(
                     [
                         'success' => false,
@@ -115,7 +141,9 @@ class PertandinganController extends BaseController
                     400
                 );
             }
-            if ($data_home_klub['id_turnamen'] == $data_away_klub['id_turnamen']) {
+            if (
+                $data_home_klub['id_turnamen'] == $data_away_klub['id_turnamen']
+            ) {
                 $waktu_pertandingan = $request->input('waktu_pertandingan');
                 $this->validate($request, [
                     'klub_home' => 'required',
@@ -126,9 +154,9 @@ class PertandinganController extends BaseController
                     'klub_home' => $klub_home,
                     'klub_away' => $klub_away,
                     'waktu_pertandingan' => $waktu_pertandingan,
-                    'id_turnamen' => $data_home_klub['id_turnamen']
+                    'id_turnamen' => $data_home_klub['id_turnamen'],
                 ]);
-    
+
                 if ($pertandingan) {
                     return response()->json(
                         [
@@ -148,8 +176,7 @@ class PertandinganController extends BaseController
                         400
                     );
                 }
-            }
-            else{
+            } else {
                 return response()->json(
                     [
                         'success' => false,
@@ -160,7 +187,6 @@ class PertandinganController extends BaseController
                 );
             }
         }
-        
     }
 
     public function updatePertandingan(Request $request, $id)

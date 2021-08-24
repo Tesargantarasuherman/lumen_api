@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTurnamensTable extends Migration
+class CreateTimTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTurnamensTable extends Migration
      */
     public function up()
     {
-        Schema::create('turnamens', function (Blueprint $table) {
+        Schema::create('tim', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_turnamen');
-            $table->string('logo_turnamen')->nullable();
+            $table->string('nama_tim');
+            $table->string('logo_tim')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTurnamensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turnamens');
+        Schema::dropIfExists('tim');
     }
 }
