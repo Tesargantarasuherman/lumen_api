@@ -15,7 +15,6 @@ class KlasemenController extends BaseController
     public function index($id)
     {
         $klasemen = Klasemen::where('id_turnamen', $id)
-            ->orderBy('nama_klub', 'asc')
             ->orderBy('poin', 'desc')
             ->get();
 
@@ -32,10 +31,9 @@ class KlasemenController extends BaseController
         $no = 0;
         foreach ($klasemen as $kls) {
             $no++;
-            $data['id_klub'] = $kls->id;
+            $data['nama_klub'] = $kls->tim->nama_tim;
             $data['nama_turnamen'] = $kls->turnamen->nama_turnamen;
             $data['no'] = $no;
-            $data['nama_klub'] = $kls->nama_klub;
             $data['poin'] = $kls->poin;
             $data['main'] = $kls->main;
             $data['menang'] = $kls->menang;

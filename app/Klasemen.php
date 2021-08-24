@@ -18,7 +18,7 @@ class Klasemen extends Model implements AuthenticatableContract, AuthorizableCon
      * @var array
      */
     protected $fillable = [
-        'nama_klub','poin','id_turnamen'
+        'id_tim','poin','id_turnamen'
     ];
 
     /**
@@ -30,6 +30,10 @@ class Klasemen extends Model implements AuthenticatableContract, AuthorizableCon
     public function turnamen()
     {
         return $this->belongsTo('App\Turnamen', 'id_turnamen', 'id');
+    }
+    public function tim()
+    {
+        return $this->belongsTo('App\Tim', 'id_tim', 'id');
     }
 
 }
