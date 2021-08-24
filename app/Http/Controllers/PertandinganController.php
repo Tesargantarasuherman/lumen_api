@@ -47,11 +47,13 @@ class PertandinganController extends BaseController
 
         foreach($pertandingan as $per){
             $data['klub_turnamen'] = $per->turnamen->nama_turnamen;
-            $data['klub_home'] = $per->klubHome->nama_klub;
-            $data['klub_away'] = $per->klubAway->nama_klub;
+            $data['klub_home'] = $per->klubHome->nama_tim;
+            $data['klub_away'] = $per->klubAway->nama_tim;
             $data['skor_home'] = $per->skor_home;
             $data['skor_away'] = $per->skor_away;
             $data['waktu_pertandingan'] = $per->waktu_pertandingan;
+            $data['tanggal_pertandingan'] = $per->tanggal_pertandingan;
+
             array_push($data_pertandingan, $data);
         }
 
@@ -87,11 +89,12 @@ class PertandinganController extends BaseController
 
         foreach ($pertandingan as $per) {
             $data['klub_turnamen'] = $per->turnamen->nama_turnamen;
-            $data['klub_home'] = $per->klubHome->nama_klub;
-            $data['klub_away'] = $per->klubAway->nama_klub;
+            $data['klub_home'] = $per->klubHome->nama_tim;
+            $data['klub_away'] = $per->klubAway->nama_tim;
             $data['skor_home'] = $per->skor_home;
             $data['skor_away'] = $per->skor_away;
             $data['waktu_pertandingan'] = $per->waktu_pertandingan;
+            $data['tanggal_pertandingan'] = $per->tanggal_pertandingan;
             array_push($data_pertandingan, $data);
         }
         if ($data_pertandingan) {

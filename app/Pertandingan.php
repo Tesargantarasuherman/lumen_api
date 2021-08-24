@@ -32,11 +32,11 @@ class Pertandingan extends Model implements AuthenticatableContract, Authorizabl
     }
     public function klubHome()
     {
-        return $this->belongsTo('App\Klasemen','klub_home','id');
+        return $this->belongsTo('App\Tim', 'klub_home', 'id');
     }
     public function klubAway()
     {
-        return $this->belongsTo('App\Klasemen','klub_away','id');
+        return $this->belongsTo('App\Tim','klub_away','id');
     }
 
 }

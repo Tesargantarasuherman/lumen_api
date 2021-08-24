@@ -26,11 +26,6 @@ class Tim extends Model implements AuthenticatableContract, AuthorizableContract
      *
      * @var array
      */
-    public function klasemen(){ 
-        return $this->hasMany('App\Klasemen','id', 'id_turnamen'); 
-    }
-    public function anggota(){ 
-        return $this->hasMany('App\Klasemen','id', 'id_turnamen'); 
-    }
+
 
 }
