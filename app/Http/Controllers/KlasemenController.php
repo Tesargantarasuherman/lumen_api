@@ -70,17 +70,17 @@ class KlasemenController extends BaseController
 
     public function tambahKlub(Request $request)
     {
-        $nama_klub = $request->input('nama_klub');
+        $id_tim = $request->input('id_tim');
         $id_turnamen = $request->input('id_turnamen');
 
         $data_turnamen = Turnamen::where('id', $id_turnamen)->first();
 
-        $data_klasemen = Klasemen::where('nama_klub', $nama_klub)
+        $data_klasemen = Klasemen::where('id_tim', $id_tim)
             ->where('id_turnamen', $id_turnamen)
             ->first();
 
         $this->validate($request, [
-            'nama_klub' => 'required',
+            'id_tim' => 'required',
             'id_turnamen' => 'required',
         ]);
 
@@ -106,7 +106,7 @@ class KlasemenController extends BaseController
                 );
             } else {
                 $klasemen = Klasemen::create([
-                    'nama_klub' => $nama_klub,
+                    'id_tim' => $id_tim,
                     'id_turnamen' => $id_turnamen,
                 ]);
             }
