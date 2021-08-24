@@ -39,6 +39,9 @@ class KlasemenController extends BaseController
             $data['menang'] = $kls->menang;
             $data['kalah'] = $kls->kalah;
             $data['imbang'] = $kls->imbang;
+            $data['gol_kemasukan'] = $kls->gol_kemasukan;
+            $data['gol_memasukan'] = $kls->gol_memasukan;
+            $data['gol_defisit'] = $kls->gol_defisit;
             array_push($data_klasemen, $data);
         }
 

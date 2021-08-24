@@ -234,9 +234,8 @@ class PertandinganController extends BaseController
                     'poin' => $data_home_klub['poin'] + 3,
                     'main' => $data_home_klub['main'] + 1,
                     'menang' => $data_home_klub['menang'] + 1,
-                    'gol_kemasukan' => $skor_away,
-                    'gol_memasukan' => $skor_home,
-                    'gol_defisit' => $skor_home - $skor_away,
+                    'gol_kemasukan' => $data_home_klub['gol_kemasukan'] + $skor_away,
+                    'gol_memasukan' => $data_home_klub['gol_memasukan'] + $skor_home,
                 ]);
                 $away_klub = Klasemen::where(
                     'id',
@@ -244,9 +243,8 @@ class PertandinganController extends BaseController
                 )->update([
                     'kalah' => $data_away_klub['kalah'] + 1,
                     'main' => $data_away_klub['main'] + 1,
-                    'gol_kemasukan' => $skor_home,
-                    'gol_memasukan' => $skor_away,
-                    'gol_defisit' => $skor_away - $skor_home,
+                    'gol_kemasukan' => $data_away_klub['gol_kemasukan'] + $skor_home,
+                    'gol_memasukan' => $data_away_klub['gol_memasukan'] + $skor_away,
                 ]);
             }
             // tim tamu menang
@@ -258,9 +256,8 @@ class PertandinganController extends BaseController
                     'poin' => $data_away_klub['poin'] + 3,
                     'main' => $data_away_klub['main'] + 1,
                     'menang' => $data_away_klub['menang'] + 1,
-                    'gol_kemasukan' => $skor_home,
-                    'gol_memasukan' => $skor_away,
-                    'gol_defisit' => $skor_away - $skor_home,
+                    'gol_kemasukan' => $data_away_klub['gol_kemasukan'] + $skor_home,
+                    'gol_memasukan' => $data_away_klub['gol_memasukan'] + $skor_away,
                 ]);
 
                 $home_klub = Klasemen::where(
@@ -269,9 +266,8 @@ class PertandinganController extends BaseController
                 )->update([
                     'kalah' => $data_home_klub['kalah'] + 1,
                     'main' => $data_home_klub['main'] + 1,
-                    'gol_kemasukan' => $skor_away,
-                    'gol_memasukan' => $skor_home,
-                    'gol_defisit' => $skor_home - $skor_away,
+                    'gol_kemasukan' => $data_home_klub['gol_kemasukan'] + $skor_away,
+                    'gol_memasukan' => $data_home_klub['gol_memasukan'] + $skor_home,
                 ]);
             }
             // imbang
@@ -283,9 +279,8 @@ class PertandinganController extends BaseController
                     'poin' => $data_away_klub['poin'] + 1,
                     'main' => $data_away_klub['main'] + 1,
                     'imbang' => $data_away_klub['imbang'] + 1,
-                    'gol_kemasukan' => $skor_home,
-                    'gol_memasukan' => $skor_away,
-                    'gol_defisit' => $skor_away - $skor_home,
+                    'gol_kemasukan' => $data_away_klub['gol_kemasukan'] + $skor_home,
+                    'gol_memasukan' => $data_away_klub['gol_memasukan'] + $skor_away,
                 ]);
 
                 $home_klub = Klasemen::where(
@@ -295,9 +290,8 @@ class PertandinganController extends BaseController
                     'poin' => $data_home_klub['poin'] + 1,
                     'main' => $data_home_klub['main'] + 1,
                     'imbang' => $data_home_klub['imbang'] + 1,
-                    'gol_kemasukan' => $skor_away,
-                    'gol_memasukan' => $skor_home,
-                    'gol_defisit' => $skor_home - $skor_away,
+                    'gol_kemasukan' => $data_home_klub['gol_kemasukan'] + $skor_away,
+                    'gol_memasukan' => $data_home_klub['gol_memasukan'] + $skor_home,
                 ]);
             }
             // end update point
