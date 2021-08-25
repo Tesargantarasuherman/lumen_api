@@ -15,8 +15,8 @@ class CreatePapanSkorsTable extends Migration
     {
         Schema::create('papan_skors', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_pemain');
-            $table->integer('id_tim');
+            $table->string('nama_pemain');
+            $table->string('nama_tim');
             $table->integer('id_pertandingan');
             $table->string('waktu');
             $table->timestamps();

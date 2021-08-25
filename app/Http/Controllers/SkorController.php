@@ -23,8 +23,8 @@ class SkorController extends BaseController
     public function update(Request $request)
     {
         {
-            $id_pemain = $request->input('id_pemain');
-            $id_tim = $request->input('id_tim');
+            $nama_pemain = $request->input('nama_pemain');
+            $nama_tim = $request->input('nama_tim');
             $id_pertandingan = $request->input('id_pertandingan');
             $waktu = $request->input('waktu');
             $status = $request->input('status');
@@ -46,8 +46,8 @@ class SkorController extends BaseController
             else{
                     // save
                     $tim = PapanSkor::create([
-                        'id_pemain' => $id_pemain,
-                        'id_tim' => $id_tim,
+                        'nama_pemain' => $nama_pemain,
+                        'nama_tim' => $nama_tim,
                         'id_pertandingan' => $id_pertandingan,
                         'waktu' => $waktu,
                     ]);

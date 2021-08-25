@@ -81,9 +81,11 @@ class PertandinganController extends BaseController
     }
     public function hasilPertandingan($id)
     {
-        $pertandingan = Pertandingan::where('id_turnamen', $id)
+        $pertandingan = Pertandingan::where('id', $id)
             ->where('status', 2)
             ->orderBy('waktu_pertandingan', 'asc')
+            ->get();
+        $skor = PapanSkor::where('id_pertandingan', $id)
             ->get();
 
         $data = [];
@@ -98,6 +100,9 @@ class PertandinganController extends BaseController
             $data['waktu_pertandingan'] = $per->waktu_pertandingan;
             $data['tanggal_pertandingan'] = $per->tanggal_pertandingan;
             $data['lokasi_pertandingan'] = $per->lokasi_pertandingan;
+            $data['skor'] = [
+                $skor
+            ];
 
             array_push($data_pertandingan, $data);
         }

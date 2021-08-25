@@ -30,6 +30,10 @@ class Pertandingan extends Model implements AuthenticatableContract, Authorizabl
     {
         return $this->belongsTo('App\Turnamen', 'id_turnamen', 'id');
     }
+    public function skor()
+    {
+        return $this->hasMany('App\PapanSkor', 'id_turnamen', 'id');
+    }
     public function klubHome()
     {
         return $this->belongsTo('App\Tim', 'klub_home', 'id');
