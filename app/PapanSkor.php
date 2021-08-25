@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class AnggotaTim extends Model implements AuthenticatableContract, AuthorizableContract
+class PapanSkor extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable;
 
@@ -18,7 +18,7 @@ class AnggotaTim extends Model implements AuthenticatableContract, AuthorizableC
      * @var array
      */
     protected $fillable = [
-        'id_pemain','id_pertandingan','waktu'
+        'id_pemain','id_pertandingan','waktu','id_tim'
     ];
 
     /**

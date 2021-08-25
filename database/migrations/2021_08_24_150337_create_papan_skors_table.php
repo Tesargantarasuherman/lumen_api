@@ -13,9 +13,10 @@ class CreatePapanSkorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('papan_skor', function (Blueprint $table) {
+        Schema::create('papan_skors', function (Blueprint $table) {
             $table->id();
             $table->integer('id_pemain');
+            $table->integer('id_tim');
             $table->integer('id_pertandingan');
             $table->string('waktu');
             $table->timestamps();
@@ -29,6 +30,6 @@ class CreatePapanSkorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('papan_skor');
+        Schema::dropIfExists('papan_skors');
     }
 }

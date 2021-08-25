@@ -69,6 +69,9 @@ $router->get('/tim/{id}/anggotatim','AnggotaTimController@anggotaTim');
 // KLASEMEN
 $router->post('/klasemen/tambah-klub','KlasemenController@tambahKlub');
 $router->get('/klasemen/{id}','KlasemenController@index');
+// SKOR
+$router->post('/pertandingan/update-skor','SkorController@update');
+
 // PERTANDINGAN
 $router->get('/pertandingan/{id}','PertandinganController@index');
 $router->get('/hasil-pertandingan/{id}','PertandinganController@hasilPertandingan');
