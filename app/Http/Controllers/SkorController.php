@@ -27,6 +27,7 @@ class SkorController extends BaseController
             $id_tim = $request->input('id_tim');
             $id_pertandingan = $request->input('id_pertandingan');
             $waktu = $request->input('waktu');
+            $status = $request->input('status');
     
             // $data_tim = Tim::where('nama_tim',$nama_tim)->first();
             $data_pertandingan = Pertandingan::where('id',$id_pertandingan)->first();
@@ -57,6 +58,7 @@ class SkorController extends BaseController
                     if($data){
                         Pertandingan::where('klub_home',$id_tim)->update([
                             'skor_home' => $data['skor_home'] + 1,
+                            'status' =>  $status,
                        ]);
                        return response()->json([
                         'success' => true,
@@ -67,6 +69,7 @@ class SkorController extends BaseController
                     else{
                         $data_away = Pertandingan::where('klub_away',$id_tim)->update([
                             'skor_away' => $away['skor_away'] + 1,
+                            'status' =>  $status,
                        ]);;
                        return response()->json([
                         'success' => true,

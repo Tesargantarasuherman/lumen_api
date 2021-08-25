@@ -17,7 +17,7 @@ class PertandinganController extends BaseController
     public function index($id)
     {
         $pertandingan = Pertandingan::where('id_turnamen', $id)
-            ->where('status', 0)
+            ->where('status', 0)->orWhere('status', 1)
             ->orderBy('waktu_pertandingan', 'asc')
             ->get();
         $data = [];
@@ -82,7 +82,7 @@ class PertandinganController extends BaseController
     public function hasilPertandingan($id)
     {
         $pertandingan = Pertandingan::where('id_turnamen', $id)
-            ->where('status', 1)
+            ->where('status', 2)
             ->orderBy('waktu_pertandingan', 'asc')
             ->get();
 
