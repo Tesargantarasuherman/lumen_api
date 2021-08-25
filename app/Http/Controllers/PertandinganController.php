@@ -212,15 +212,11 @@ class PertandinganController extends BaseController
     {
         $data_pertandingan = Pertandingan::where('id', $id)->first();
 
-        $skor_home = $request->input('skor_home');
-        $skor_away = $request->input('skor_away');
-        $this->validate($request, [
-            'skor_home' => 'required',
-            'skor_away' => 'required',
-        ]);
+        $skor_home = $data_pertandingan['skor_home'];
+        $skor_away = $data_pertandingan['skor_away'];
 
         // cek skor
-        if ($data_pertandingan['status'] != 1) {
+        if ($data_pertandingan['status'] != 2) {
             // ambil data klasemen
             $data_home_klub = Klasemen::where(
                 'id',
@@ -230,6 +226,7 @@ class PertandinganController extends BaseController
                 'id',
                 $data_pertandingan['klub_away']
             )->first();
+
 
             // tim kandang menang
             if ($skor_home > $skor_away) {
@@ -251,6 +248,9 @@ class PertandinganController extends BaseController
                     'main' => $data_away_klub['main'] + 1,
                     'gol_kemasukan' => $data_away_klub['gol_kemasukan'] + $skor_home,
                     'gol_memasukan' => $data_away_klub['gol_memasukan'] + $skor_away,
+                ]);
+                $data_pertandingan = Pertandingan::where('id', $id)->update([
+                    'status' => 2,
                 ]);
             }
             // tim tamu menang
@@ -300,6 +300,7 @@ class PertandinganController extends BaseController
                     'gol_memasukan' => $data_home_klub['gol_memasukan'] + $skor_home,
                 ]);
             }
+
             // end update point
         } else {
             return response()->json(
