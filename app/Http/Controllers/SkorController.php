@@ -30,7 +30,8 @@ class SkorController extends BaseController
             $id_pertandingan = $request->input('id_pertandingan');
             $waktu = $request->input('waktu');
     
-            // $data_tim = Tim::where('nama_tim',$nama_tim)->first();
+            $data_tim = Tim::where('id',$id_tim)->first();
+            $data_pemain = AnggotaTim::where('id',$id_pemain)->first();
             $data_pertandingan = Pertandingan::where('id',$id_pertandingan)->first();
 
             $this->validate($request, [
@@ -51,6 +52,12 @@ class SkorController extends BaseController
                         'id_tim' => $id_tim,
                         'id_pertandingan' => $id_pertandingan,
                         'waktu' => $waktu,
+                    ]);
+                    $tabelSkor = TopSkor::create([
+                        'nama_pemain' => $data_pemain->nama_pemain,
+                        'nama_tim' => $data_tim,
+                        'id_pertandingan' => $id_pertandingan,
+                        'jumlah_gol' => $waktu,
                     ]);
 
                     $data = Pertandingan::where('klub_home',$id_tim)->where('id',$id_pertandingan)->first();
