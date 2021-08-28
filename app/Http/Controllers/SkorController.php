@@ -30,9 +30,8 @@ class SkorController extends BaseController
             $id_pertandingan = $request->input('id_pertandingan');
             $waktu = $request->input('waktu');
     
-            $data_tim = Tim::where('id',$id_tim)->first();
-            $data_pemain = AnggotaTim::where('id',$id_pemain)->first();
             $data_pertandingan = Pertandingan::where('id',$id_pertandingan)->first();
+            $data_top_skor = TopSkor::where('id_pemain',$id_pemain)->first();
 
             $this->validate($request, [
                 'id_tim' => 'required',
@@ -53,12 +52,19 @@ class SkorController extends BaseController
                         'id_pertandingan' => $id_pertandingan,
                         'waktu' => $waktu,
                     ]);
-                    $tabelSkor = TopSkor::create([
-                        'nama_pemain' => $data_pemain->nama_pemain,
-                        'nama_tim' => $data_tim,
-                        'id_pertandingan' => $id_pertandingan,
-                        'jumlah_gol' => $waktu,
-                    ]);
+                    if($data_top_skor){
+                        TopSkor::where('id_tim',$id_tim)->update([
+                            'jumlah_skor' => $data_top_skor['jumlah_skor'] + 1,
+                       ]);
+                    }
+                    else{
+                        $tabelSkor = TopSkor::create([
+                            'id_pemain' => $id_pemain,
+                            'id_tim' => $id_tim,
+                            'id_pertandingan' => $id_pertandingan,
+                            'jumlah_skor' => 1,
+                        ]);
+                    }
 
                     $data = Pertandingan::where('klub_home',$id_tim)->where('id',$id_pertandingan)->first();
                     $away = Pertandingan::where('klub_away',$id_tim)->where('id',$id_pertandingan)->first();

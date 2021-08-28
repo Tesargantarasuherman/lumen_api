@@ -18,7 +18,7 @@ class TopSkor extends Model implements AuthenticatableContract, AuthorizableCont
      * @var array
      */
     protected $fillable = [
-        'nama_pemain','nama_tim','jumlah_gol','id_turnamen'
+        'id_pemain','id_tim','jumlah_gol','id_turnamen'
     ];
 
     /**
