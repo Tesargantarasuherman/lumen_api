@@ -12,6 +12,8 @@ use App\Tim;
 use App\Turnamen;
 use App\Pertandingan;
 use App\PapanSkor;
+use App\AnggotaTim;
+use App\TopSkor;
 
 class SkorController extends BaseController
 {
