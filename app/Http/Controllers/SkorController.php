@@ -15,7 +15,7 @@ use App\PapanSkor;
 
 class SkorController extends BaseController
 {
-    public function index($id)
+    public function topSkor($id)
     {
        
     }

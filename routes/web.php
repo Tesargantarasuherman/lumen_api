@@ -71,6 +71,7 @@ $router->post('/klasemen/tambah-klub','KlasemenController@tambahKlub');
 $router->get('/klasemen/{id}','KlasemenController@index');
 // SKOR
 $router->post('/pertandingan/update-skor','SkorController@update');
+$router->get('/pertandingan/top-skor/{id}','SkorController@topSkor');
 
 // PERTANDINGAN
 $router->get('/pertandingan/{id}','PertandinganController@index');
