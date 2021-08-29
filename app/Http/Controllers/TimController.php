@@ -32,7 +32,7 @@ class TimController extends BaseController
             if($data_tim){
                 return response()->json([
                     'success' => false,
-                    'message' => 'Nama Turnamen sudah ada',
+                    'message' => 'Nama Tim sudah ada',
                     'data'    => ''
                 ],200);
             }
@@ -56,7 +56,7 @@ class TimController extends BaseController
             {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Nama Turnamen sukses di buat',
+                    'message' => 'Nama Tim sukses di buat',
                     'data'    => $tim
                 ],201);
             }
@@ -64,7 +64,7 @@ class TimController extends BaseController
             {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Nama Turnamen gagal di buat',
+                    'message' => 'Nama Tim gagal di buat',
                     'data'    => ''
                 ],400);
             }
