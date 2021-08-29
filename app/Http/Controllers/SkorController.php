@@ -28,10 +28,16 @@ class SkorController extends BaseController
             $id_pemain = $request->input('id_pemain');
             $id_tim = $request->input('id_tim');
             $id_pertandingan = $request->input('id_pertandingan');
+            $id_turnamen = $request->input('id_turnamen');
             $waktu = $request->input('waktu');
     
             $data_pertandingan = Pertandingan::where('id',$id_pertandingan)->first();
-            $data_top_skor = TopSkor::where('id_pemain',$id_pemain)->first();
+            $tabel_top_skor = TopSkor::all();
+            
+            $count_tabel_top_skor = count($tabel_top_skor);
+            if($count_tabel_top_skor > 0){
+                $data_top_skor = TopSkor::where('id_pemain',$id_pemain)->first();
+            }
 
             $this->validate($request, [
                 'id_tim' => 'required',
@@ -52,17 +58,17 @@ class SkorController extends BaseController
                         'id_pertandingan' => $id_pertandingan,
                         'waktu' => $waktu,
                     ]);
-                    if($data_top_skor){
-                        TopSkor::where('id_tim',$id_tim)->update([
-                            'jumlah_skor' => $data_top_skor['jumlah_skor'] + 1,
+                    if(isset($data_top_skor)){
+                        TopSkor::where('id_pemain',$id_pemain)->update([
+                            'jumlah_gol' => $data_top_skor['jumlah_gol'] + 1,
                        ]);
                     }
                     else{
                         $tabelSkor = TopSkor::create([
                             'id_pemain' => $id_pemain,
                             'id_tim' => $id_tim,
-                            'id_pertandingan' => $id_pertandingan,
-                            'jumlah_skor' => 1,
+                            'id_turnamen' => $id_turnamen,
+                            'jumlah_gol' => 1,
                         ]);
                     }
 

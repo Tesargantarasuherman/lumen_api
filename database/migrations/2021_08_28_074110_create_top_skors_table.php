@@ -15,8 +15,8 @@ class CreateTopSkorsTable extends Migration
     {
         Schema::create('top_skors', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_pemain');
-            $table->string('nama_tim');
+            $table->string('id_pemain');
+            $table->string('id_tim');
             $table->string('jumlah_gol');
             $table->integer('id_turnamen');
             $table->timestamps();
