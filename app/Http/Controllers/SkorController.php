@@ -25,6 +25,8 @@ class SkorController extends BaseController
 
         foreach ($data_top_skor as $skor) {
             $data['nama_pemain'] = $skor->pemain->nama_pemain;
+            $data['nama_tim'] = $skor->tim->nama_tim;
+            $data['jumlah_gol'] = $skor->jumlah_gol;
             array_push($res_top_skor, $data);
         }
 
