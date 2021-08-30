@@ -19,7 +19,7 @@ class SkorController extends BaseController
 {
     public function topSkor($id)
     {
-       
+        $data_top_skor = TopSkor::where('id_turnamen',$id)->get();
     }
 
     public function update(Request $request)
