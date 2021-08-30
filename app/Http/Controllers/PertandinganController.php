@@ -249,9 +249,6 @@ class PertandinganController extends BaseController
                     'gol_kemasukan' => $data_away_klub['gol_kemasukan'] + $skor_home,
                     'gol_memasukan' => $data_away_klub['gol_memasukan'] + $skor_away,
                 ]);
-                $data_pertandingan = Pertandingan::where('id', $id)->update([
-                    'status' => 2,
-                ]);
             }
             // tim tamu menang
             elseif ($skor_home < $skor_away) {
@@ -319,7 +316,7 @@ class PertandinganController extends BaseController
         $pertandingan = Pertandingan::whereId($id)->update([
             'skor_home' => $skor_home,
             'skor_away' => $skor_away,
-            'status' => 1,
+            'status' => 2,
         ]);
 
         if ($pertandingan) {
