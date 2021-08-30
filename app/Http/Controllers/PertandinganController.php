@@ -90,6 +90,10 @@ class PertandinganController extends BaseController
 
         $data = [];
         $data_pertandingan = [];
+        $pencetak_gol_home =[];
+        $res_pencetak_gol_home =[];
+        $pencetak_gol_away =[];
+        $res_pencetak_gol_away =[];
 
         foreach ($pertandingan as $per) {
             $data['klub_turnamen'] = $per->turnamen->nama_turnamen;
@@ -100,9 +104,18 @@ class PertandinganController extends BaseController
             $data['waktu_pertandingan'] = $per->waktu_pertandingan;
             $data['tanggal_pertandingan'] = $per->tanggal_pertandingan;
             $data['lokasi_pertandingan'] = $per->lokasi_pertandingan;
-            $data['skor'] = [
-                $skor
-            ];
+
+            foreach($skor as $skor){
+                if($skor->pemain->id_tim == $per->klubHome->id){
+                    $pencetak_gol_home['nama'] =  $skor->pemain->nama_pemain;
+                    $pencetak_gol_home['id'] =  $skor->pemain->id_tim;
+                    array_push($res_pencetak_gol_home, $pencetak_gol_home);
+                }else{
+                    $pencetak_gol_away['nama'] =  $skor->pemain->nama_pemain;
+                    $pencetak_gol_away['id'] =  $skor->pemain->id_tim;
+                    array_push($res_pencetak_gol_away, $pencetak_gol_away);
+                }
+            }
 
             array_push($data_pertandingan, $data);
         }
@@ -111,7 +124,11 @@ class PertandinganController extends BaseController
                 [
                     'success' => true,
                     'message' => 'Hasil Pertandingan berhasil diambil',
-                    'data' => $data_pertandingan,
+                    'data' => [
+                     'data' =>  $data_pertandingan,
+                     'pencetak gol_home' =>$res_pencetak_gol_home,
+                     'pencetak gol_away' =>$res_pencetak_gol_away,
+                    ]
                 ],
                 201
             );

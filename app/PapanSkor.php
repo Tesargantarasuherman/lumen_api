@@ -27,13 +27,13 @@ class PapanSkor extends Model implements AuthenticatableContract, AuthorizableCo
      * @var array
      * 
      */
-    public function pertandingan()
+    public function tim()
     {
-        return $this->belongsTo('App\Pertandingan', 'id_pertandingan', 'id');
+        return $this->belongsTo('App\Tim', 'id_tim', 'id');
     }
     public function pemain()
     {
-        return $this->belongsTo('App\Tim', 'id_pertandingan', 'id');
+        return $this->belongsTo('App\AnggotaTim', 'id_pemain', 'id');
     }
 
 }
