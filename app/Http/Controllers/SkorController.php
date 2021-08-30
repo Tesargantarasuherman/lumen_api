@@ -20,6 +20,7 @@ class SkorController extends BaseController
     public function topSkor($id)
     {
         $data_top_skor = TopSkor::where('id_turnamen',$id)->get();
+        $data_liga = Turnamen::where('id',$id)->first();
         $data = [];
         $res_top_skor= [];
 
@@ -35,7 +36,10 @@ class SkorController extends BaseController
             return response()->json([
                 'success' => true,
                 'message' => 'Data Top Skor sukses di buat',
-                'data'    => $res_top_skor
+                'data'    => [
+                    'liga'=>$data_liga->nama_turnamen,
+                    'data'=>$res_top_skor
+                ]
             ],201);
         }
         else
