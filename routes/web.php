@@ -72,6 +72,7 @@ $router->get('/klasemen/{id}','KlasemenController@index');
 // SKOR
 $router->post('/pertandingan/update-skor','SkorController@update');
 $router->get('/pertandingan/top-skor/{id}','SkorController@topSkor');
+$router->get('/image/{imageName}','ImageController@logoTim');
 
 // PERTANDINGAN
 $router->get('/pertandingan/{id}','PertandinganController@index');

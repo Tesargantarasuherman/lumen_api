@@ -103,6 +103,8 @@ class PertandinganController extends BaseController
             $data['logo_home'] = $per->klubHome->logo_tim;
             $data['klub_away'] = $per->klubAway->nama_tim;
             $data['logo_away'] = $per->klubAway->logo_tim;
+            $data['skor_home'] = $per->skor_home;
+            $data['skor_away'] = $per->skor_away;
             $data['waktu_pertandingan'] = $per->waktu_pertandingan;
             $data['tanggal_pertandingan'] = $per->tanggal_pertandingan;
             $data['lokasi_pertandingan'] = $per->lokasi_pertandingan;
