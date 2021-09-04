@@ -17,7 +17,7 @@ class CreateTopSkorsTable extends Migration
             $table->id();
             $table->string('id_pemain');
             $table->string('id_tim');
-            $table->string('jumlah_gol');
+            $table->string('jumlah_gol')->default(0);
             $table->integer('id_turnamen');
             $table->timestamps();
         });
