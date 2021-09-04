@@ -18,7 +18,7 @@ class UserController extends BaseController
 
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::where('id',$id)->orWhere('provider_id',$id)->first();
 
         if($user){
             return response()->json([
