@@ -15,12 +15,18 @@ class AuthController extends BaseController
     {
         $name = $request->input('name');
         $email = $request->input('email');
+        $provider = $request->input('provider');
+        $api_token = $request->input('api_token');
+        $provider_id = $request->input('provider_id');
         $password = Hash::make($request->input('password'));
 
         $register = User::create([
             'name' => $name,
             'email'=> $email,
             'password'=> $password,
+            'provider_id'=> $provider_id,
+            'provider'=> $provider,
+            'api_token'=> $api_token,
         ]);
 
         if($register)
