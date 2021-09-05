@@ -20,14 +20,25 @@ class AuthController extends BaseController
         $provider_id = $request->input('provider_id');
         $password = Hash::make($request->input('password'));
 
-        $register = User::create([
-            'name' => $name,
-            'email'=> $email,
-            'password'=> $password,
-            'provider_id'=> $provider_id,
-            'provider'=> $provider,
-            'api_token'=> $api_token,
-        ]);
+        if($provider == 'google'){
+            $register= User::where(
+                'provider_id',
+            )->update([
+                'api_token' => $api_token
+            ]);
+        }
+        else{
+            $register = User::create([
+                'name' => $name,
+                'email'=> $email,
+                'password'=> $password,
+                'provider_id'=> $provider_id,
+                'provider'=> $provider,
+                'api_token'=> $api_token,
+                'status_login' => $status_login
+            ]);
+        }
+
 
         if($register)
         {
