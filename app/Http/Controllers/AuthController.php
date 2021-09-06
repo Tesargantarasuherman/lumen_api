@@ -102,11 +102,11 @@ class AuthController extends BaseController
                 ]);
         }
     }
-    public function logout(Request $request)
+    public function logout($id)
     {
-        $email = $request->input('email');
+        // $email = $request->input('email');
 
-        $user = User::where('email',$email)->first();
+        $user = User::where('provider_id',$id)->orWhere('id',$id)->first();
 
         if($user){
 
