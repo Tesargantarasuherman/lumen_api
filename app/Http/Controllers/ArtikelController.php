@@ -13,7 +13,7 @@ class ArtikelController extends BaseController
 {
     public function index()
     {
-        $artikel = Artikel::orderBy('created_at', 'asc')->paginate(3);
+        $artikel = Artikel::orderBy('created_at', 'asc')->get();
 
         if ($artikel) {
             return response()->json(
@@ -38,7 +38,6 @@ class ArtikelController extends BaseController
 
     public function tambahArtikel(Request $request)
     {
-        {
             $id_penulis = $request->input('id_penulis');
             $judul = $request->input('judul');
             $deskripsi = $request->input('deskripsi');
@@ -84,6 +83,37 @@ class ArtikelController extends BaseController
                     'data'    => ''
                 ],400);
             }
+    }
+    public function detailArtikel($id)
+    {
+        $data_artikel = Artikel::where('id',$id)->get();
+        $data = [];
+        $res_artikel= [];
+
+        foreach ($data_artikel as $artikel) {
+            $data['judul'] = $artikel->judul;
+            $data['deskripsi'] = $artikel->deskripsi;
+            $data['tanggal'] = $artikel->created_at;
+            array_push($res_artikel, $data);
+        }
+
+        if($data_artikel)
+        {
+            return response()->json([
+                'success' => true,
+                'message' => 'Artikel sukses di panggil',
+                'data'    => [
+                    'data'=>$res_artikel
+                ]
+            ],201);
+        }
+        else
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Artikel gagal di panggil',
+                'data'    => ''
+            ],400);
         }
     }
 }

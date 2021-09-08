@@ -83,4 +83,5 @@ $router->post('/pertandingan/update-pertandingan/{id}','PertandinganController@u
 // Artikel
 $router->post('/artikel/tambah-artikel','ArtikelController@tambahArtikel');
 $router->get('/artikel','ArtikelController@index');
+$router->get('/artikel/{id}','ArtikelController@detailArtikel');
 
