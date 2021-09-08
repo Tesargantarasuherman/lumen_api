@@ -33,7 +33,7 @@ class Comentars extends Model implements AuthenticatableContract, AuthorizableCo
     }
     public function pengguna()
     {
-        return $this->belongsTo('App\User', 'id_user', 'id');
+        return $this->belongsTo('App\User','id_user','provider_id');
     }
 
 
