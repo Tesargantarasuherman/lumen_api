@@ -13,7 +13,7 @@ class KomentarController extends BaseController
 {
     public function index($id)
     {
-        $komentar = Comentars::where('id_artikel', $id)->get();
+        $komentar = Comentars::where('id_artikel', $id)->orderBy('created_at', 'desc')->get();
         $data = [];
         $res_komentar= [];
 
