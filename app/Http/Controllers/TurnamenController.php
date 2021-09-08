@@ -13,7 +13,7 @@ class TurnamenController extends BaseController
 {
     public function index()
     {
-        $turnamen = Turnamen::orderBy('nama_turnamen', 'asc')->paginate(1);
+        $turnamen = Turnamen::orderBy('nama_turnamen', 'asc')->paginate(2);
         if ($turnamen) {
             return response()->json(
                 [
