@@ -16,7 +16,7 @@ class CreateComentarsTable extends Migration
         Schema::create('comentars', function (Blueprint $table) {
             $table->id();
             $table->integer('id_artikel');
-            $table->integer('id_user');
+            $table->string('id_user');
             $table->longText('isi');
             $table->timestamps();
         });
