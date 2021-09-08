@@ -80,3 +80,7 @@ $router->get('/pertandingan/{id}','PertandinganController@index');
 $router->get('/hasil-pertandingan/{id}','PertandinganController@hasilPertandingan');
 $router->post('/pertandingan/tambah-pertandingan','PertandinganController@tambahPertandingan');
 $router->post('/pertandingan/update-pertandingan/{id}','PertandinganController@updatePertandingan');
+// Artikel
+$router->post('/artikel/tambah-artikel','ArtikelController@tambahArtikel');
+$router->get('/artikel','ArtikelController@index');
+
