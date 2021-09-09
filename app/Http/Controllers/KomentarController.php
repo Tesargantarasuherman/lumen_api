@@ -11,6 +11,10 @@ use App\Comentars;
 
 class KomentarController extends BaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['only' =>['tambahKomentar']]);
+    }
     public function index($id)
     {
         $komentar = Comentars::where('id_artikel', $id)->orderBy('created_at', 'desc')->get();
