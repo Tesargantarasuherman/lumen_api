@@ -87,4 +87,7 @@ $router->get('/artikel/{id}','ArtikelController@detailArtikel');
 // Komentar
 $router->get('/komentar/{id}','KomentarController@index');
 $router->post('/komentar/tambah-komentar','KomentarController@tambahKomentar');
+// Like
+$router->post('/artikel/like','LikeController@tambahLike');
+$router->get('/artikel/like/{id}','LikeController@index');
 
