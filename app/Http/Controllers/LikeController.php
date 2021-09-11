@@ -45,12 +45,12 @@ class LikeController extends BaseController
         $id_user = $request->input('id_user');
         $id_artikel = $request->input('id_artikel');
 
-        $data_like = Likes::where('id_artikel',$id_artikel)->orWhere('id_user',$id_user)->get();
+        $data_like = Likes::where('id_artikel',$id_artikel)->where('id_user',$id_user)->first();
         if($data_like){
             return response()->json(
                 [
                     'success' => false,
-                    'message' => 'like gagal di buat',
+                    'message' => 'like telah gagal di buat',
                     'data' => '',
                 ],
                 400
@@ -75,7 +75,7 @@ class LikeController extends BaseController
                     [
                         'success' => false,
                         'message' => 'like gagal di buat',
-                        'data' => '',
+                        'data' => null,
                     ],
                     400
                 );
