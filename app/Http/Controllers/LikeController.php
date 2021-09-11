@@ -12,6 +12,10 @@ use App\Likes;
 
 class LikeController extends BaseController
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['only' =>['tambahLike']]);
+    }
     public function index($id)
     {
         $like = Likes::where('id_artikel',$id)->count();
