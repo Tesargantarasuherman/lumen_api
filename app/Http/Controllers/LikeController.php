@@ -28,7 +28,18 @@ class LikeController extends BaseController
                 ],
                 201
             );
-        } else {
+        }
+        else if($like  == null){
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'like gagal di ambil',
+                    'data' => 0,
+                ],
+                201
+            );
+        }
+         else {
             return response()->json(
                 [
                     'success' => false,
@@ -47,14 +58,18 @@ class LikeController extends BaseController
 
         $data_like = Likes::where('id_artikel',$id_artikel)->where('id_user',$id_user)->first();
         if($data_like){
-            return response()->json(
-                [
-                    'success' => false,
-                    'message' => 'like telah gagal di buat',
-                    'data' => '',
-                ],
-                400
-            );
+            $batal_like = $data_like->delete();
+            if($batal_like){
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'like dibatalkan',
+                        'data' => $batal_like,
+                    ],
+                    201
+                );
+            }
+
         }
         else{
             $like = Likes::create([
