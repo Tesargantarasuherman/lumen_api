@@ -90,4 +90,5 @@ $router->post('/komentar/tambah-komentar','KomentarController@tambahKomentar');
 // Like
 $router->post('/artikel/like','LikeController@tambahLike');
 $router->get('/artikel/like/{id}','LikeController@index');
+$router->get('/artikel/like/user/{id}/{id_user}','LikeController@show');
 

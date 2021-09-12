@@ -14,11 +14,11 @@ class LikeController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('auth',['only' =>['tambahLike']]);
+        $this->middleware('auth', ['only' => ['tambahLike']]);
     }
     public function index($id)
     {
-        $like = Likes::where('id_artikel',$id)->count();
+        $like = Likes::where('id_artikel', $id)->count();
         if ($like) {
             return response()->json(
                 [
@@ -28,8 +28,7 @@ class LikeController extends BaseController
                 ],
                 201
             );
-        }
-        else if($like  == null){
+        } elseif ($like == null) {
             return response()->json(
                 [
                     'success' => false,
@@ -38,8 +37,7 @@ class LikeController extends BaseController
                 ],
                 201
             );
-        }
-         else {
+        } else {
             return response()->json(
                 [
                     'success' => false,
@@ -56,10 +54,12 @@ class LikeController extends BaseController
         $id_user = $request->input('id_user');
         $id_artikel = $request->input('id_artikel');
 
-        $data_like = Likes::where('id_artikel',$id_artikel)->where('id_user',$id_user)->first();
-        if($data_like){
+        $data_like = Likes::where('id_artikel', $id_artikel)
+            ->where('id_user', $id_user)
+            ->first();
+        if ($data_like) {
             $batal_like = $data_like->delete();
-            if($batal_like){
+            if ($batal_like) {
                 return response()->json(
                     [
                         'success' => true,
@@ -69,9 +69,7 @@ class LikeController extends BaseController
                     201
                 );
             }
-
-        }
-        else{
+        } else {
             $like = Likes::create([
                 'id_user' => $id_user,
                 'id_artikel' => $id_artikel,
@@ -95,9 +93,31 @@ class LikeController extends BaseController
                     400
                 );
             }
-
         }
-
-        
+    }
+    public function show($id, $id_user)
+    {
+        $like = Likes::where('id_artikel', $id)
+            ->where('id_user', $id_user)
+            ->first();
+        if ($like) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'User Found',
+                    'data' => $like,
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'User Not Found',
+                    'data' => null,
+                ],
+                200
+            );
+        }
     }
 }
