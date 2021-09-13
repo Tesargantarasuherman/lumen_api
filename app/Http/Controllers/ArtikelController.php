@@ -104,6 +104,7 @@ class ArtikelController extends BaseController
         foreach ($data_artikel as $artikel) {
             $data['judul'] = $artikel->judul;
             $data['deskripsi'] = $artikel->deskripsi;
+            $data['penulis'] = $artikel->pengguna->name;
             $data['tanggal'] = $artikel->created_at;
             array_push($res_artikel, $data);
         }
