@@ -27,7 +27,7 @@ class Artikel extends Model implements AuthenticatableContract, AuthorizableCont
      * @var array
      */
     public function pengguna(){ 
-        return $this->hasMany('App\User','id', 'id_pengguna'); 
+        return $this->hasOne('App\User','id', 'id_penulis'); 
     }
 
 }

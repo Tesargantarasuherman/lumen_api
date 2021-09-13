@@ -14,13 +14,24 @@ class ArtikelController extends BaseController
     public function index()
     {
         $artikel = Artikel::orderBy('created_at', 'asc')->get();
+        $data = [];
+        $res_artikel= [];
+
+        foreach ($artikel as $artikel) {
+            $data['id'] = $artikel->id;
+            $data['judul'] = $artikel->judul;
+            $data['penulis'] = $artikel->pengguna->name;
+            $data['deskripsi'] = $artikel->deskripsi;
+            $data['tanggal'] = $artikel->created_at;
+            array_push($res_artikel, $data);
+        }
 
         if ($artikel) {
             return response()->json(
                 [
                     'success' => true,
                     'message' => 'artikel berhasil diambil',
-                    'data' => $artikel,
+                    'data' => $res_artikel,
                 ],
                 201
             );
