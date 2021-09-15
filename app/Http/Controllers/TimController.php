@@ -47,6 +47,7 @@ class TimController extends BaseController
                 // save
                 $tim = Tim::create([
                     'nama_tim' => $nama_tim,
+                    'id_user' => $id_user,
                     'logo_tim' => $file !== null ? $filename : 'default.jpg',
                 ]);
             }

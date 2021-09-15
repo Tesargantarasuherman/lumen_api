@@ -44,7 +44,6 @@ class AuthController extends BaseController
                 'name' => $name,
                 'email' => $email,
                 'password' => $password,
-                'provider_id' => $provider_id,
                 'provider' => $provider,
                 'api_token' => $api_token,
                 'provider_id' =>rand(1111111111, 999999999)

@@ -18,7 +18,7 @@ class Tim extends Model implements AuthenticatableContract, AuthorizableContract
      * @var array
      */
     protected $fillable = [
-        'nama_tim','logo_tim'
+        'nama_tim','logo_tim','id_user'
     ];
 
     /**
