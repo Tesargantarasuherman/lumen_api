@@ -20,7 +20,8 @@ class TimController extends BaseController
     public function tambahTim(Request $request)
     {
         $nama_tim = $request->input('nama_tim');
-
+        $id_user = $request->input('id_user');
+        
         $data_tim = Tim::where('nama_tim', $nama_tim)->first();
 
         $this->validate($request, [

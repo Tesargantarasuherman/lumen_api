@@ -15,6 +15,7 @@ class CreateTimsTable extends Migration
     {
         Schema::create('tims', function (Blueprint $table) {
             $table->id();
+            $table->string('id_user');
             $table->string('nama_tim');
             $table->string('logo_tim')->nullable();
             $table->timestamps();
