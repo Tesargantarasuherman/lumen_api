@@ -52,7 +52,7 @@ class UserController extends BaseController
                 'success' => false,
                 'message' => 'User Not Found',
                 'data' => ''
-            ],404);
+            ],200);
         }
     }
 }
