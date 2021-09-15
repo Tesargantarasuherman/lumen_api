@@ -35,4 +35,24 @@ class UserController extends BaseController
             ],404);
         }
     }
+    public function cari(Request $request)
+    {
+        $email = $request->input('email');
+        $user = User::where('email',$email)->first();
+
+        if($user){
+            return response()->json([
+                'success' => true,
+                'message' => 'User Found',
+                'data' => $user
+            ],200);
+        }
+        else{
+            return response()->json([
+                'success' => false,
+                'message' => 'User Not Found',
+                'data' => ''
+            ],404);
+        }
+    }
 }

@@ -58,6 +58,7 @@ $router->get('/fail',function(){
 $router->post('/register','AuthController@register');
 $router->post('/login','AuthController@login');
 $router->get('/user/{id}','UserController@show');
+$router->post('/user','UserController@cari');
 $router->post('/logout/{id}','AuthController@logout');
 
 // TURNAMEN
@@ -68,6 +69,7 @@ $router->post('/tim/tambah-tim','TimController@tambahTim');
 $router->post('/tim/tambah-anggotatim','AnggotaTimController@tambahAnggotaTim');
 $router->get('/tim/{id}/anggotatim','AnggotaTimController@anggotaTim');
 $router->get('/tim/anggota','AnggotaTimController@allAnggota');
+$router->get('/tim/{id}','TimController@index');
 // KLASEMEN
 $router->post('/klasemen/tambah-klub','KlasemenController@tambahKlub');
 $router->get('/klasemen/{id}','KlasemenController@index');

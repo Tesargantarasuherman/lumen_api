@@ -15,6 +15,18 @@ class TimController extends BaseController
 {
     public function index($id)
     {
+        $data_tim = Tim::where('id_user', $id)->first();
+
+        if ($data_tim) {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Tim Berhasil Dipanggil',
+                    'data' => $data_tim,
+                ],
+                200
+            );
+        } 
     }
 
     public function tambahTim(Request $request)
