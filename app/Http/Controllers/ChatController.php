@@ -41,16 +41,32 @@ class ChatController extends BaseController
             ],400);
         }
     }
-    public function isiChat($id)
+    public function isiChat($id,$id_user)
     {   
         $chat = Chat::Where('id_chat',$id)->get();
-
+        $aktif = [];
+        $isi_chat_aktif = [];
+        $isi_chat_tidak_aktif = [];
+        foreach($chat as $chat){
+            if($chat->id_pengechat == $id_user ){
+                $aktif['isi_chat'] = $chat->isi_chat;
+                array_push($isi_chat_aktif,$aktif);
+            }
+            else{
+                $aktif['isi_chat'] = $chat->isi_chat;
+                array_push($isi_chat_tidak_aktif,$aktif);
+            }
+        }
         if($chat)
         {
             return response()->json([
                 'success' => true,
                 'message' => 'Chat berhasil ambil',
-                'data'    => $chat
+                'data'    =>[
+                    'aktif'=>$isi_chat_aktif,
+                    'tidak_aktif'=>$isi_chat_tidak_aktif,
+                    ] 
+
             ],201);
         }
         else
