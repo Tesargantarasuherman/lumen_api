@@ -18,7 +18,7 @@ class Chat extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'id_pengechat','isi_chat','id_yangdichat'
+        'id_pengechat','isi_chat','id_yangdichat','id_chat'
     ];
 
     /**

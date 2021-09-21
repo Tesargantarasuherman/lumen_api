@@ -17,6 +17,7 @@ class CreateChatsTable extends Migration
             $table->id();
             $table->string('id_pengechat');
             $table->string('isi_chat');
+            $table->string('id_chat');
             $table->string('id_yangdichat');
             $table->timestamps();
         });
