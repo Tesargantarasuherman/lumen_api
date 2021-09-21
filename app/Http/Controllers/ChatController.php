@@ -41,18 +41,15 @@ class ChatController extends BaseController
             ],400);
         }
     }
-    public function isiChat(Request $request)
+    public function isiChat($id)
     {   
-        $id_pengechat = $request->input('id_pengechat');
-        $id_yangdichat = $request->input('id_yangdichat');
-
-        $chat = Chat::Where('id_pengechat',$id_pengechat)->Where('id_pengechat',$id_yangdichat)->orderBy('created_at', 'ASC')->get();
+        $chat = Chat::Where('id_chat',$id)->get();
 
         if($chat)
         {
             return response()->json([
                 'success' => true,
-                'message' => 'Chat berhasil dikirim',
+                'message' => 'Chat berhasil ambil',
                 'data'    => $chat
             ],201);
         }
@@ -60,7 +57,7 @@ class ChatController extends BaseController
         {
             return response()->json([
                 'success' => false,
-                'message' => 'Chat gagal dikirim',
+                'message' => 'Chat gagal ambil',
                 'data'    => ''
             ],400);
         }
