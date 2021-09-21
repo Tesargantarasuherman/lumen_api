@@ -1,6 +1,7 @@
 
 <?php
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,13 @@ use Illuminate\Support\Str;
 | and give it the Closure to call when that URI is requested.
 |
 */
+
+$router->get('/mail', function() {
+    Mail::to(['test@foo.com'])->send(new TestMail);
+
+    return new TestMail;
+});
+$router->get('send_email' ,'MailController@mail');
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
@@ -94,4 +102,7 @@ $router->post('/komentar/tambah-komentar','KomentarController@tambahKomentar');
 $router->post('/artikel/like','LikeController@tambahLike');
 $router->get('/artikel/like/{id}','LikeController@index');
 $router->get('/artikel/like/user/{id}/{id_user}','LikeController@show');
+// Chat
+$router->post('/chat/tambahchat','ChatController@tambahChat');
+
 
