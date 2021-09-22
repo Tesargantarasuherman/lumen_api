@@ -20,14 +20,22 @@ class TimController extends BaseController
         if ($data_tim) {
             return response()->json(
                 [
-                    'success' => false,
+                    'success' => true,
                     'message' => 'Tim Berhasil Dipanggil',
                     'data' => $data_tim,
                 ],
                 200
             );
-        } 
-    }
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'Nama Tim Tidak Ada',
+                    'data' => '',
+                ],
+                200
+            );
+        }    }
 
     public function tambahTim(Request $request)
     {

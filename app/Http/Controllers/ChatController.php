@@ -46,15 +46,19 @@ class ChatController extends BaseController
         $chat = Chat::Where('id_chat',$id)->get();
         $aktif = [];
         $isi_chat_aktif = [];
-        $isi_chat_tidak_aktif = [];
+        // $isi_chat_tidak_aktif = [];
         foreach($chat as $chat){
             if($chat->id_pengechat == $id_user ){
                 $aktif['isi_chat'] = $chat->isi_chat;
+                $aktif['aktif'] = true;
+                $aktif['waktu'] = $chat->created_at;
                 array_push($isi_chat_aktif,$aktif);
             }
             else{
                 $aktif['isi_chat'] = $chat->isi_chat;
-                array_push($isi_chat_tidak_aktif,$aktif);
+                $aktif['aktif'] = false;
+                $aktif['waktu'] = $chat->created_at;
+                array_push($isi_chat_aktif,$aktif);
             }
         }
         if($chat)
@@ -62,10 +66,11 @@ class ChatController extends BaseController
             return response()->json([
                 'success' => true,
                 'message' => 'Chat berhasil ambil',
-                'data'    =>[
-                    'aktif'=>$isi_chat_aktif,
-                    'tidak_aktif'=>$isi_chat_tidak_aktif,
-                    ] 
+                'data' => $isi_chat_aktif
+                // 'data'    =>[
+                //     'aktif'=>$isi_chat_aktif,
+                //     'tidak_aktif'=>$isi_chat_tidak_aktif,
+                //     ] 
 
             ],201);
         }
