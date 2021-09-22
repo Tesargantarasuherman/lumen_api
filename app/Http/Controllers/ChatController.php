@@ -124,21 +124,20 @@ class ChatController extends BaseController
 
     public function isiChat($id,$id_user)
     {   
-        $chat = Chat::Where('id_chat',$id)->get();
+        $chat = Chat::Where('id_chat',$id)->OrderBy('created_at','ASC')->get();
         $aktif = [];
         $isi_chat_aktif = [];
-        // $isi_chat_tidak_aktif = [];
-        foreach($chat as $chat){
-            if($chat->id_pengechat == $id_user ){
-                $aktif['isi_chat'] = $chat->isi_chat;
+        foreach($chat as $c){
+            if($c->id_pengechat == $id_user ){
+                $aktif['isi_chat'] = $c->isi_chat;
                 $aktif['aktif'] = true;
-                $aktif['waktu'] = $chat->created_at;
+                $aktif['waktu'] = $c->created_at;
                 array_push($isi_chat_aktif,$aktif);
             }
             else{
-                $aktif['isi_chat'] = $chat->isi_chat;
+                $aktif['isi_chat'] = $c->isi_chat;
                 $aktif['aktif'] = false;
-                $aktif['waktu'] = $chat->created_at;
+                $aktif['waktu'] = $c->created_at;
                 array_push($isi_chat_aktif,$aktif);
             }
         }
@@ -148,8 +147,8 @@ class ChatController extends BaseController
                 'success' => true,
                 'message' => 'Chat berhasil ambil',
                 'data' => [
-                    'id'=> $chat->id_chat,
-                    'chat' => $isi_chat_aktif,
+                    'id'=> $c->id_chat,
+                    'chat' => $chat,
                     ]
                 // 'data'    =>[
                 //     'aktif'=>$isi_chat_aktif,
