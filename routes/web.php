@@ -104,6 +104,8 @@ $router->get('/artikel/like/{id}','LikeController@index');
 $router->get('/artikel/like/user/{id}/{id_user}','LikeController@show');
 // Chat
 $router->post('/chat/tambahchat','ChatController@tambahChat');
+$router->post('/chat/balas','ChatController@balasChat');
 $router->get('/chat/{id}/{id_user}','ChatController@isiChat');
+$router->get('/chatsaya/{id}','ChatController@chatSaya');
 
 
