@@ -147,7 +147,9 @@ class ChatController extends BaseController
                 'success' => true,
                 'message' => 'Chat berhasil ambil',
                 'data' => [
-                    'id'=> $c->id_chat,
+                    'id_chat'=> $c->id_chat,
+                    'id_yangdichat'=> $c->id_yangdichat,
+                    'id_pengechat'=> $c->id_pengechat,
                     'chat' => $chat,
                     ]
                 // 'data'    =>[
