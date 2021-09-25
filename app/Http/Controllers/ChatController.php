@@ -127,29 +127,15 @@ class ChatController extends BaseController
         $chat = Chat::Where('id_chat',$id)->OrderBy('created_at','ASC')->get();
         $aktif = [];
         $isi_chat_aktif = [];
-        foreach($chat as $c){
-            if($c->id_pengechat == $id_user ){
-                $aktif['isi_chat'] = $c->isi_chat;
-                $aktif['aktif'] = true;
-                $aktif['waktu'] = $c->created_at;
-                array_push($isi_chat_aktif,$aktif);
-            }
-            else{
-                $aktif['isi_chat'] = $c->isi_chat;
-                $aktif['aktif'] = false;
-                $aktif['waktu'] = $c->created_at;
-                array_push($isi_chat_aktif,$aktif);
-            }
-        }
         if($chat)
         {
             return response()->json([
                 'success' => true,
                 'message' => 'Chat berhasil ambil',
                 'data' => [
-                    'id_chat'=> $c->id_chat,
-                    'id_yangdichat'=> $c->id_yangdichat,
-                    'id_pengechat'=> $c->id_pengechat,
+                    'id_chat'=> $chat[0]->id_chat,
+                    'id_yangdichat'=> $chat[0]->id_yangdichat,
+                    'id_pengechat'=> $chat[0]->id_pengechat,
                     'chat' => $chat,
                     ]
                 // 'data'    =>[
