@@ -135,7 +135,7 @@ class ChatController extends BaseController
                 'data' => [
                     'id_chat'=> $chat[0]->id_chat,
                     'id_yangdichat'=> $chat[0]->id_yangdichat,
-                    'id_pengechat'=> $chat[0]->id_pengechat,
+                    'id_pengechat'=> $chat[0]->pengechat->name,
                     'chat' => $chat,
                     ]
                 // 'data'    =>[
