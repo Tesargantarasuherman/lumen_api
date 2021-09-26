@@ -27,9 +27,9 @@ class Chat extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      * 
      */
-    public function tim()
+    public function chat()
     {
-        return $this->belongsTo('App\Tim', 'id_tim', 'id');
+        return $this->belongsTo('App\Chat', 'id_tim', 'id');
     }
 
 
