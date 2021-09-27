@@ -159,13 +159,22 @@ class ChatController extends BaseController
 
 public function chatSaya($id){   
     $chat = id_chats::Where('id_pengechat',$id)->OrWhere('id_yangdichat',$id)->get();
-
+    $isi_chat =[] ;
+    $res_chat =[] ;
+    foreach($chat as $c){
+        $isi_chat['id_chat'] = $c->id_chat;
+        $isi_chat['id_yangdichat'] = $c->id_yangdichat;
+        $isi_chat['id_pengechat'] = $c->id_pengechat;
+        $isi_chat['nama_yangdichat'] = $c->yang_di_chat->name;
+        $isi_chat['nama_pengechat'] = $c->pengechat->name;
+        array_push($res_chat,$isi_chat);
+    }
     if($chat)
     {
         return response()->json([
             'success' => true,
             'message' => 'Chat berhasil ambil',
-            'data' => $chat
+            'data' => $res_chat
         ],201);
     }
     else
