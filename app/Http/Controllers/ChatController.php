@@ -166,7 +166,7 @@ public function chatSaya($id){
         $isi_chat['id_yangdichat'] = $c->id_yangdichat;
         $isi_chat['id_pengechat'] = $c->id_pengechat;
         $isi_chat['nama_yangdichat'] = $c->yang_di_chat->name;
-        $isi_chat['nama_pengechat'] = $c->pengechat->name;
+        $isi_chat['nama_pengechat'] = $c->id_yangdichat == $id ? $c->yang_di_chat->name : $c->pengechat->name;
         array_push($res_chat,$isi_chat);
     }
     if($chat)
