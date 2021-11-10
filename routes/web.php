@@ -107,5 +107,9 @@ $router->post('/chat/tambahchat','ChatController@tambahChat');
 $router->post('/chat/balas','ChatController@balasChat');
 $router->get('/chat/{id}/{id_user}','ChatController@isiChat');
 $router->get('/chatsaya/{id}','ChatController@chatSaya');
+// Futsals
+$router->get('/futsal/ambiltempat','ItemFutsalsController@index');
+$router->post('/futsal/tambahtempat','ItemFutsalsController@tambahTempatFutsal');
+
 
 
