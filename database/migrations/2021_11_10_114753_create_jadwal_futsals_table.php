@@ -15,6 +15,10 @@ class CreateJadwalFutsalsTable extends Migration
     {
         Schema::create('jadwal_futsals', function (Blueprint $table) {
             $table->id();
+            $table->string('id_futsal');
+            $table->string('tanggal');
+            $table->string('jam');
+            $table->string('status');
             $table->timestamps();
         });
     }

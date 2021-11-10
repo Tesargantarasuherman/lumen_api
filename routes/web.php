@@ -111,5 +111,9 @@ $router->get('/chatsaya/{id}','ChatController@chatSaya');
 $router->get('/futsal/ambiltempat','ItemFutsalsController@index');
 $router->post('/futsal/tambahtempat','ItemFutsalsController@tambahTempatFutsal');
 
+$router->get('/futsal/ambiljadwal/{idFutsal}/{tanggal}','JadwalFutsalsController@index');
+$router->post('/futsal/tambahjadwal','JadwalFutsalsController@tambahJadwalFutsal');
+
+
 
 
