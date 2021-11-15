@@ -14,13 +14,36 @@ class JadwalFutsalsController extends BaseController
     public function index($idFutsal,$tanggal)
     {
         $jadwal_futsal = JadwalFutsals::where('id_futsal',$idFutsal)->where('tanggal',$tanggal)->orderBy('jam', 'asc')->get();
+        $data_futsal = [];
+        $res_data_futsal = [];
+        $jadwal_futsal_belum_di_booking = [
+                "id_futsal" => "1",
+                "tanggal"=> "2021-11-10",
+                "jam" => "14",
+                "status"=> null,
+            
+        ];
+        for($i = 1 ;$i<=31 ;$i++){
+            // foreach($jadwal_futsal as $jadwal){
+                if(intval($jadwal_futsal[$i]->jam) == $i){
+                    // $data_futsal['jam'] =  intval($jadwal_futsal[$i]->jam);
+                    // // $data_futsal['status'] = $jadwal->status;
+                    // array_push($res_data_futsal,$data_futsal);
+                }
 
+            // }
+            $data_futsal['jam'] = $i;
+            $data_futsal['status'] =null;
+            array_push($res_data_futsal,$data_futsal);
+
+        }
+        $jadwal_futsal;
         if ($jadwal_futsal) {
             return response()->json(
                 [
                     'success' => true,
                     'message' => 'tempat futsal berhasil diambil',
-                    'data' => $jadwal_futsal,
+                    'data' => $res_data_futsal,
                 ],
                 201
             );
