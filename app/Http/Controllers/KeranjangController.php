@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 
 use App\Keranjangs;
 use App\JadwalFutsals;
+use App\ItemFutsals;
 
 class KeranjangController extends BaseController
 {
@@ -44,11 +45,13 @@ class KeranjangController extends BaseController
         $tanggal = $request->input('tanggal');
         $jam = $request->input('jam');
         $jadwal_futsal = JadwalFutsals::where('id_futsal',$futsal_id)->where('tanggal',$tanggal)->where('jam',$jam)->first();
+        $harga = ItemFutsals::where('id',$futsal_id)->first();
 
             if($jadwal_futsal->status == ""){
                 $item_futsal = Keranjangs::create([
                     'id_futsal' => $id_futsal,
                     'id_user' => $id_user,
+                    'harga' => $harga->harga,
                     'tanggal' => $tanggal,
                     'jam' => $jam,
                 ]); 

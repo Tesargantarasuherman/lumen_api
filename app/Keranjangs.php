@@ -18,7 +18,7 @@ class Keranjangs extends Model implements AuthenticatableContract, AuthorizableC
      * @var array
      */
     protected $fillable = [
-        'id_futsal','id_user','tanggal','jam'
+        'id_futsal','id_user','tanggal','jam','harga'
     ];
 
     /**

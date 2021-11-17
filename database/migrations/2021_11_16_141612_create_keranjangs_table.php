@@ -18,6 +18,7 @@ class CreateKeranjangsTable extends Migration
             $table->string('id_futsal');
             $table->string('id_user');
             $table->string('tanggal');
+            $table->string('harga');
             $table->string('jam');
             $table->timestamps();
         });
