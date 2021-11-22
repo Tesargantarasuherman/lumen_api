@@ -42,8 +42,6 @@ class ItemFutsalsController extends BaseController
         $harga = $request->input('harga');
         $lokasi = $request->input('lokasi');
         $foto = $request->input('foto');
-
-
             $item_futsal = ItemFutsals::create([
                 'nama' => $nama,
                 'harga' => $harga,
