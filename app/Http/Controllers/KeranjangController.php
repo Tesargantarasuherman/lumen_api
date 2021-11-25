@@ -13,7 +13,7 @@ use App\ItemFutsals;
 
 class KeranjangController extends BaseController
 {
-    public function index()
+    public function index($user_id,$futsal_id)
     {
         $keranjangs = Keranjangs::orderBy('created_at', 'asc')->get();
 

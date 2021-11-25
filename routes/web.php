@@ -114,6 +114,7 @@ $router->post('/futsal/tambahtempat','ItemFutsalsController@tambahTempatFutsal')
 $router->get('/futsal/ambiljadwal/{idFutsal}/{tanggal}','JadwalFutsalsController@index');
 $router->post('/futsal/tambahjadwal','JadwalFutsalsController@tambahJadwalFutsal');
 // Keranjang
+$router->get('/futsal/keranjang/{user_id}/{futsal_id}','KeranjangController@index');
 $router->post('/futsal/tambahkeranjang/{user_id}/{futsal_id}','KeranjangController@tambahKeranjang');
 
 
