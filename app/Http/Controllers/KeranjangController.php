@@ -46,7 +46,7 @@ class KeranjangController extends BaseController
         $jam = $request->input('jam');
         $jadwal_futsal = JadwalFutsals::where('id_futsal',$futsal_id)->where('tanggal',$tanggal)->where('jam',$jam)->first();
         $harga = ItemFutsals::where('id',$futsal_id)->first();
-
+        if($jadwal_futsal){
             if($jadwal_futsal->status == ""){
                 $item_futsal = Keranjangs::create([
                     'id_futsal' => $id_futsal,
@@ -62,12 +62,23 @@ class KeranjangController extends BaseController
                     return response()->json(
                         [
                             'success' => false,
-                            'message' => 'Tempat Futsal Sudah di Booking',
+                            'message' => 'Tempat Futsal Sudah Ada Yang Booking',
                             'data' => $jadwal_futsal,
                         ],
                         400
                     );
             }
+        }
+        else{
+            return response()->json(
+                [
+                    'success' => false,
+                    'message' => 'jadwal Futsal Tidak Ada',
+                    'data' => null,
+                ],
+                400
+            ); 
+        }
 
             if ($item_futsal) {
                 return response()->json(
